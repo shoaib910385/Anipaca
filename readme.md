@@ -42,6 +42,7 @@
 > 1. This website is just an unofficial clone of [hianime.to](https://hianime.to) But both share same database.
 > 2. The content that this website provides is not mine, nor is it hosted by me. These belong to their respective owners. This website just demonstrates how to build an ANIME WEBSITE .
 > 3. Do not use this for commercial purposes. If you place ads on your site, I will personally file a DMCA complaint.
+> 4. This is just for educational purposes 
 
 <!-- TABLE OF CONTENTS -->
 <details>
