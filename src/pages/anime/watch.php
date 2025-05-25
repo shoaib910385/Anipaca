@@ -3,8 +3,8 @@
 require_once('src/component/anime/qtip.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/_config.php');
 
-//error_reporting(E_ALL);
-//ini_set('display_errors', 1);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $urlPath = $_SERVER['REQUEST_URI'];
 
@@ -112,9 +112,8 @@ $totalVotes = $like_count + $dislike_count;
     <meta property="twitter:url" content="<?= htmlspecialchars($websiteUrl) ?>/details/<?= htmlspecialchars($url) ?>">
     <meta property="twitter:card" content="summary">
     <meta name="apple-mobile-web-app-status-bar" content="#202125">
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-63430163bc99824a"></script>
     <meta name="theme-color" content="#202125">
-    <!-- Enhanced ShareThis integration -->
-    <script src="<?=$websiteUrl?>/src/assets/js/share-enhanced.js"></script>
     <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/styles.min.css?v=<?= $version ?>">
     <link rel="apple-touch-icon" href="<?= $websiteUrl ?>/public/logo/favicon.png?v=<?= $version ?>" />
     <link rel="shortcut icon" href="<?= $websiteUrl ?>/public/logo/favicon.png?v=<?= $version ?>" type="image/x-icon" />
@@ -129,7 +128,6 @@ $totalVotes = $like_count + $dislike_count;
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="<?=$websiteUrl?>/src/assets/css/search.css">
     <script src="<?=$websiteUrl?>/src/assets/js/search.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=<?= htmlspecialchars($recaptchaSiteKey ?? '') ?>"></script>
     
     <noscript>
     <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css>
@@ -740,19 +738,8 @@ $totalVotes = $like_count + $dislike_count;
 
         </div>
         <?php include('src/component/anime/sidenav.php'); ?>
-            <div class="clearfix"></div>
-        </div>
+        <div class="clearfix"></div>
     </div>
-    <div class="share-buttons share-buttons-min mt-3">
-        <div class="share-buttons-block" style="padding-bottom: 0 !important;">
-            <div class="share-icon"></div>
-            <div class="sbb-title mr-3">
-                <span>Share <?= htmlspecialchars($websiteTitle) ?></span>
-                <p class="mb-0">to your friends</p>
-            </div>
-            <div class="sharethis-inline-share-buttons st-center st-has-labels st-inline-share-buttons st-animated" id="st-1"></div>
-            <div class="clearfix"></div>
-        </div>
     </div>
     <?php include('src/component/footer.php'); ?>
     <div id="mask-overlay"></div>
@@ -1104,7 +1091,7 @@ if (typeof loadWatchedEpisodes === 'function') {
     loadWatchedEpisodes();
 }
 
-$("#iframe-embed").on('load', handleAutoNext);
+$(iframe).on('load', handleAutoNext);
 
 });
 
