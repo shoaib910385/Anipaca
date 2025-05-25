@@ -3,8 +3,8 @@
 require_once('src/component/anime/qtip.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/_config.php');
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 $urlPath = $_SERVER['REQUEST_URI'];
 
@@ -100,69 +100,45 @@ $totalVotes = $like_count + $dislike_count;
     <meta name="robots" content="index, follow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Content-Language" content="en">
-    <meta property="og:title" content="Watch <?= htmlspecialchars($episode['title']) ?> on <?= htmlspecialchars($websiteTitle) ?>">
+    <meta property="og:title" content="Watch <?= htmlspecialchars($animeData['title']) ?> on <?= htmlspecialchars($websiteTitle) ?>">
     <meta property="og:description" content="<?= htmlspecialchars(substr($animeData['overview'], 0, 150)) ?> ... at <?= htmlspecialchars($websiteUrl) ?>">
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="<?= htmlspecialchars($websiteTitle) ?>">
     <meta property="og:url" content="<?= htmlspecialchars($websiteUrl) ?>/anime/<?= htmlspecialchars($url) ?>">
     <meta itemprop="image" content="<?= htmlspecialchars($animeData['poster']) ?>">
-
-
-
     <meta property="twitter:title" content="Watch on <?= htmlspecialchars($websiteTitle) ?>">
     <meta property="twitter:description" content="<?= htmlspecialchars(substr($animeData['overview'], 0, 150)) ?> ... at <?= htmlspecialchars($websiteUrl) ?>">
-    <meta property="twitter:url" content="<?= htmlspecialchars($websiteUrl) ?>/anime/<?= htmlspecialchars($url) ?>">
+    <meta property="twitter:url" content="<?= htmlspecialchars($websiteUrl) ?>/details/<?= htmlspecialchars($url) ?>">
     <meta property="twitter:card" content="summary">
     <meta name="apple-mobile-web-app-status-bar" content="#202125">
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-63430163bc99824a"></script>
     <meta name="theme-color" content="#202125">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" type="text/css">
-    <link rel="apple-touch-icon" href="<?= htmlspecialchars($websiteUrl) ?>/favicon.png?v=<?= htmlspecialchars($version) ?>" />
-    <link rel="shortcut icon" href="<?= htmlspecialchars($websiteUrl) ?>/favicon.png?v=<?= htmlspecialchars($version) ?>" type="image/x-icon" />
-    <link rel="apple-touch-icon" sizes="180x180" href="<?= htmlspecialchars($websiteUrl) ?>/public/logo/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?= htmlspecialchars($websiteUrl) ?>/public/logo/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= htmlspecialchars($websiteUrl) ?>/public/logo/favicon-16x16.png">
-    <link rel="mask-icon" href="<?= htmlspecialchars($websiteUrl) ?>/public/logo/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="icon" sizes="192x192" href="<?= htmlspecialchars($websiteUrl) ?>/public/logo/touch-icon-192x192.png?v=<?= htmlspecialchars($version) ?>">
-    <link rel="stylesheet" href="<?= htmlspecialchars($websiteUrl) ?>/src/assets/css/styles.min.css?v=<?= htmlspecialchars($version) ?>">
-    <link rel="stylesheet" href="<?= htmlspecialchars($websiteUrl) ?>/src/assets/css/min.css?v=<?= htmlspecialchars($version) ?>">
-    <link rel="stylesheet" href="<?= htmlspecialchars($websiteUrl) ?>/src/assets/css/new.css?v=<?= htmlspecialchars($version) ?>">
+    <!-- Enhanced ShareThis integration -->
+    <script src="<?=$websiteUrl?>/src/assets/js/share-enhanced.js"></script>
+    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/styles.min.css?v=<?= $version ?>">
+    <link rel="apple-touch-icon" href="<?= $websiteUrl ?>/public/logo/favicon.png?v=<?= $version ?>" />
+    <link rel="shortcut icon" href="<?= $websiteUrl ?>/public/logo/favicon.png?v=<?= $version ?>" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= $websiteUrl ?>/public/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= $websiteUrl ?>/public/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= $websiteUrl ?>/public/logo/favicon-16x16.png">
+    <link rel="mask-icon" href="<?= $websiteUrl ?>/public/logo/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="icon" sizes="192x192" href="<?= $websiteUrl ?>/public/logo/touch-icon-192x192.png?v=<?= $version ?>">
+    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/new.css?v=<?= $version ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="<?=$websiteUrl?>/src/assets/css/search.css">
+    <script src="<?=$websiteUrl?>/src/assets/js/search.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?= htmlspecialchars($recaptchaSiteKey ?? '') ?>"></script>
     
-    <script>
-    setTimeout(function() {
-        const cssFiles = [
-            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css',
-            'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'
-        ];
-
-        const firstLink = document.getElementsByTagName('link')[0];
-
-        cssFiles.forEach(file => {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = `${file}?v=<?= htmlspecialchars($version) ?>`;
-            link.type = 'text/css';
-            firstLink.parentNode.insertBefore(link, firstLink);
-        });
-    }, 500);
-    </script>
-
     <noscript>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css>
+    <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css>
     </noscript>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-R34F2GCSBW');
-    </script>
- 
-    <link rel="stylesheet" href="<?= htmlspecialchars($websiteUrl) ?>/src/assets/css/search.css">
-    <script src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/search.js"></script>
+    <script>const cssFiles=["https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css","https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"],firstLink=document.getElementsByTagName("link")[0];cssFiles.forEach((s=>{const t=document.createElement("link");t.rel="stylesheet",t.href=`${s}?v=<?=$version?>`,t.type="text/css",firstLink.parentNode.insertBefore(t,firstLink)}))</script>
+    <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css>
+    <link rel=stylesheet href=https://use.fontawesome.com/releases/v5.3.1/css/all.css>
+    <link rel=stylesheet href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
         .pizza{ margin: 2rem auto; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 1.5rem; border-radius: .6rem; text-align: center; color: #000; font-size: 16px; font-weight: 400; background-color: #FAACA8; background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);}
         .pizza a{ color: #000; font-weight: 500;text-shadow: 0 1px 0 #fff;}
@@ -175,25 +151,7 @@ $totalVotes = $like_count + $dislike_count;
             .pizza{ font-size: 13px; gap: .6rem}
             .pizza-y{ min-height: 200px;}
         }
-
-
-
-
     </style>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.2/dist/index.min.js"></script>
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=67521dcc10699f0019237fbb&product=inline-share-buttons&source=platform" async="async"></script>
-
-
-    <script type="text/javascript" src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/play.js"></script>
-
 </head>
 
 <body data-page="movie_watch">
@@ -698,7 +656,7 @@ $totalVotes = $like_count + $dislike_count;
 
                     <section class="block_area block_area-comment" id="comment-block">
                         <?php 
-                        $animeId = trim(explode('?', $streaming)[0]); 
+                        $animeId = $animeData['id']; 
                         $episodeId = isset($_GET['ep']) ? $_GET['ep'] : '1';
                         $user_id = $_COOKIE['userID'] ?? null;
                         $user = null;
@@ -782,398 +740,403 @@ $totalVotes = $like_count + $dislike_count;
 
         </div>
         <?php include('src/component/anime/sidenav.php'); ?>
-        <div class="clearfix"></div>
+            <div class="clearfix"></div>
+        </div>
     </div>
+    <div class="share-buttons share-buttons-min mt-3">
+        <div class="share-buttons-block" style="padding-bottom: 0 !important;">
+            <div class="share-icon"></div>
+            <div class="sbb-title mr-3">
+                <span>Share <?= htmlspecialchars($websiteTitle) ?></span>
+                <p class="mb-0">to your friends</p>
+            </div>
+            <div class="sharethis-inline-share-buttons st-center st-has-labels st-inline-share-buttons st-animated" id="st-1"></div>
+            <div class="clearfix"></div>
+        </div>
     </div>
     <?php include('src/component/footer.php'); ?>
     <div id="mask-overlay"></div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/app.js?v=1.4"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script type="text/javascript" src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/app.js"></script>
-    <script type="text/javascript" src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/comman.js"></script>
-    <script type="text/javascript" src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/movie.js"></script>
-    <link rel="stylesheet" href="<?= htmlspecialchars($websiteUrl) ?>/src/assets/css/jquery-ui.css">
+    <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/comman.js"></script>
+    <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/comment.js"></script>
+    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/function.js"></script>
-    
-    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/function.js"></script>
+    <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/app.min.js?v=1.4"></script>
+   
     
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const iframe = document.getElementById("iframe-embed");
-        let currentServerType = 'sub';
-        let currentEpisodeId = '<?= htmlspecialchars($streaming) ?>';
-        let animeId = '<?= htmlspecialchars($animeId) ?>';
-        let autoNextEnabled = true;
-        let autoSkipEnabled = true; // Initialize auto-next feature as disabled
+  <script>
+$(document).ready(function() {
+    const $iframe = $("#iframe-embed");
+    let currentServerType = localStorage.getItem('preferredServerType') || 'dub';
+    let currentServerName = localStorage.getItem('preferredServerName') || '';
+    let currentEpisodeId = '<?= htmlspecialchars($streaming) ?>';
+    let animeId = '<?= htmlspecialchars($animeData['id']) ?>';
+    let autoNextEnabled = true;
+    let autoSkipEnabled = true;
 
-        // Function to toggle auto-next feature
-        function toggleAutoNext() {
-            autoNextEnabled = !autoNextEnabled;
-            const toggleResult = document.querySelector(".pc-autonext .tb-result");
-            toggleResult.textContent = autoNextEnabled ? "" : ""; // Update text based on state
-            console.log(`Auto-next is now ${autoNextEnabled ? "enabled" : "disabled"}.`);
-        }
-
-         // Function to toggle auto-skip feature
+    function toggleAutoNext() {
+        autoNextEnabled = !autoNextEnabled;
+        $(".pc-autonext .tb-result").text(autoNextEnabled ? "" : "");
+       
+    }
     function toggleAutoSkip() {
         autoSkipEnabled = !autoSkipEnabled;
-        const toggleResult = document.querySelector(".pc-autoskip .tb-result");
-        toggleResult.textContent = autoSkipEnabled ? "" : "";
-        console.log(`Auto-skip is now ${autoSkipEnabled ? "enabled" : "disabled"}.`);
+        $(".pc-autoskip .tb-result").text(autoSkipEnabled ? "" : "");
     }
 
-        // Attach event listener to the auto-next toggle element
-        document.querySelector(".pc-autonext").addEventListener("click", toggleAutoNext);
-        document.querySelector(".pc-autoskip").addEventListener("click", toggleAutoSkip);
+    $(".pc-autonext").on("click", toggleAutoNext);
+    $(".pc-autoskip").on("click", toggleAutoSkip);
 
-        // Function to handle auto-next feature
-        function handleAutoNext() {
-            const videoPlayer = iframe.contentWindow.document.querySelector('video');
-            if (videoPlayer) {
-                videoPlayer.addEventListener('ended', function() {
-                    if (autoNextEnabled) {
-                        nextEpisode(); // Call nextEpisode if autoNext is enabled
-                    }
-                });
-            }
+    $iframe.on('load', function() {
+        const videoPlayer = $iframe[0].contentWindow.document.querySelector('video');
+        if (videoPlayer) {
+            $(videoPlayer).on('ended', function() {
+                if (autoNextEnabled) nextEpisode();
+            });
         }
+    });
 
-        // Ensure this line is present to initialize the auto-next feature
-        iframe.addEventListener('load', handleAutoNext);
+    function updateWatchedEpisodeUI(episodeNumber) {
+        $(`.ssl-item[data-number="${episodeNumber}"]`).addClass('watched');
+    }
 
-        function updateWatchedEpisodeUI(episodeNumber) {
-            const episodeItem = document.querySelector(`.ssl-item[data-number="${episodeNumber}"]`);
-            if (episodeItem && !episodeItem.classList.contains('watched')) {
-                episodeItem.classList.add('watched');
-            }
+    async function markEpisodeAsWatched(anilistId, episodeNumber) {
+        try {
+            updateWatchedEpisodeUI(episodeNumber);
+        } catch (error) {
+            console.error('Error marking episode as watched:', error);
         }
+    }
 
-        async function markEpisodeAsWatched(anilistId, episodeNumber) {
-            console.log('Marking episode as watched:', episodeNumber);
-            try {
-                updateWatchedEpisodeUI(episodeNumber);
-            } catch (error) {
-                console.error('Error marking episode as watched:', error);
+    async function updateWatchHistory(episodeData) {
+        try {
+            const response = await fetch('/src/ajax/wh-up.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    animeId: '<?= htmlspecialchars($animeData['id']) ?>',
+                    animeName: '<?= htmlspecialchars(str_replace("'", "\'", $animeData['title'])) ?>',
+                    poster: '<?= htmlspecialchars($animeData['poster']) ?>',
+                    subCount: <?= htmlspecialchars($animeData['subEp']) ?>,
+                    dubCount: <?= htmlspecialchars($animeData['dubEp']) ?>,
+                    anilistId: '<?= htmlspecialchars($animeData['anilistId'] ?? '') ?>',
+                    episodeNumber: episodeData.episodeNumber
+                })
+            });
+            const data = await response.json();
+            if (data.success) {
+                markEpisodeAsWatched(data.anilistId, episodeData.episodeNumber);
+            } else {
+                throw new Error(data.message);
             }
+        } catch (error) {
+            console.error('Error updating watch history:', error);
+            markEpisodeAsWatched(null, episodeData.episodeNumber);
         }
+    }
 
-        async function updateWatchHistory(episodeData) {
-            try {
-                const response = await fetch('/src/ajax/wh-up.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        animeId: '<?= htmlspecialchars($animeId) ?>',
-                        animeName: '<?= htmlspecialchars(str_replace("'", "\'", $animeData['title'])) ?>',
-                        poster: '<?= htmlspecialchars($animeData['poster']) ?>',
-                        subCount: <?= htmlspecialchars($animeData['subEp']) ?>,
-                        dubCount: <?= htmlspecialchars($animeData['dubEp']) ?>,
-                        anilistId: '<?= htmlspecialchars($animeData['anilistId'] ?? '') ?>',
-                        episodeNumber: episodeData.episodeNumber
-                    })
-                });
-                
-                const data = await response.json();
-                if (data.success) {
-                    markEpisodeAsWatched(data.anilistId, episodeData.episodeNumber);
-                } else {
-                    throw new Error(data.message);
-                }
-            } catch (error) {
-                console.error('Error updating watch history:', error);
-                markEpisodeAsWatched(null, episodeData.episodeNumber);
-            }
+    async function fetchServers(episodeId) {
+        try {
+            const response = await fetch(`/src/ajax/server.php?episodeId=${episodeId}`);
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching servers:', error);
+            return null;
         }
+    }
 
-        async function fetchServers(episodeId) {
-            try {
-                const response = await fetch(`/src/ajax/server.php?episodeId=${episodeId}`);
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
-                console.log('Fetched servers:', data);
-                return data;
-            } catch (error) {
-                console.error('Error fetching servers:', error);
-                return null;
-            }
-        }
-
-        async function updateServerList(episodeId) {
-            const servers = await fetchServers(episodeId);
+    async function updateServerList(episodeId) {
+        const servers = await fetchServers(episodeId);
         if (!servers) return;
-        const subServerList = document.querySelector('.ps_-block-sub .ps__-list');
-        if (servers.sub && servers.sub.length > 0) {
-            subServerList.innerHTML = servers.sub.map((server, index) => `
+
+        const $subList = $('.ps_-block-sub .ps__-list');
+        const $dubList = $('.ps_-block-dub .ps__-list');
+
+        // Render SUB servers
+        if (servers.sub?.length) {
+            $subList.html(servers.sub.map((server, index) => `
                 <div class="item">
-                    <button 
-                        class="btn btn-server ${currentServerType === 'sub' && index === 0 ? 'active' : ''}"
+                    <button class="btn btn-server" 
                         data-episode-id="${episodeId}"
                         data-server-id="${server.serverId}"
                         data-server-type="sub"
-                        data-server-name="${server.serverName}"
-                    >${server.serverName}</button>
+                        data-server-name="${server.serverName}">
+                        ${server.serverName}
+                    </button>
                 </div>
-            `).join('');
+            `).join(''));
         } else {
-            subServerList.innerHTML = '<div class="item">Please select an episode</div>';
+            $subList.html('<div class="item">Please select an episode</div>');
         }
-        const dubServerList = document.querySelector('.ps_-block-dub .ps__-list');
-        if (servers.dub && servers.dub.length > 0) {
-            dubServerList.innerHTML = servers.dub.map((server, index) => `
+
+        // Render DUB servers
+        if (servers.dub?.length) {
+            $dubList.html(servers.dub.map((server, index) => `
                 <div class="item">
-                    <button 
-                        class="btn btn-server ${currentServerType === 'dub' && index === 0 ? 'active' : ''}"
+                    <button class="btn btn-server"
                         data-episode-id="${episodeId}"
                         data-server-id="${server.serverId}"
                         data-server-type="dub"
-                        data-server-name="${server.serverName}"
-                    >${server.serverName}</button>
+                        data-server-name="${server.serverName}">
+                        ${server.serverName}
+                    </button>
                 </div>
-            `).join('');
+            `).join(''));
         } else {
-            dubServerList.innerHTML = '<div class="item">No DUB servers available</div>';
+            $dubList.html('<div class="item">No DUB servers available</div>');
         }
+
         attachServerListeners();
-        const activeServer = document.querySelector('.btn-server.active');
-        if (!activeServer) {
-            const firstServer = document.querySelector(`.ps_-block-${currentServerType} .btn-server`);
-            if (firstServer) {
-                firstServer.click();
+
+        // Try to select preferred server
+        let foundPreferred = $(`.btn-server[data-server-type="${currentServerType}"][data-server-name="${currentServerName}"]`);
+        if (foundPreferred.length) {
+            foundPreferred.first().click();
+            console.log(`Preferred server found and selected: type=${currentServerType}, name=${currentServerName}`);
+        } else {
+            
+            // Fallback: select first available server and update preference
+            let fallbackServer = $('.btn-server').first();
+            if (fallbackServer.length) {
+                fallbackServer.click();
+                currentServerType = fallbackServer.data('server-type');
+                currentServerName = fallbackServer.data('server-name');
+                localStorage.setItem('preferredServerType', currentServerType);
+                localStorage.setItem('preferredServerName', currentServerName);
+                console.log(`Preferred server not found. Fallback to: type=${currentServerType}, name=${currentServerName}`);
             }
         }
     }
 
     function attachServerListeners() {
-        const serverButtons = document.querySelectorAll(".btn-server");
-        serverButtons.forEach(button => {
-            button.addEventListener("click", function() {
-                // Remove 'active' class from all server buttons
-                serverButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add 'active' class to the clicked button
-                this.classList.add('active');
+        $(".btn-server").off("click").on("click", function() {
+            $(".btn-server").removeClass('active');
+            $(this).addClass('active');
 
-                const serverId = this.getAttribute("data-server-id");
-                const serverType = this.getAttribute("data-server-type");
-                let serverName = this.getAttribute("data-server-name");
-                const episodeId = this.getAttribute("data-episode-id");
-                const urlParams = new URLSearchParams(window.location.search);
-                const episodeNumber = urlParams.get('ep');
+            const serverId = $(this).data("server-id");
+            const serverType = $(this).data("server-type");
+            let serverName = $(this).data("server-name");
+            const episodeId = $(this).data("episode-id");
+            const urlParams = new URLSearchParams(window.location.search);
+            const episodeNumber = urlParams.get('ep');
 
-                // Check if the server name is "streamsb" or "streamtape" and adjust the serverName
-                if ((serverName === "streamsb" && serverId === "5") || (serverName === "streamtape" && serverId === "3")) {
-                    serverName = "hd-2";
-                }
+            // Update preferred server in memory and localStorage
+            currentServerType = serverType;
+            currentServerName = serverName;
+            localStorage.setItem('preferredServerType', serverType);
+            localStorage.setItem('preferredServerName', serverName);
 
-                // Add skip parameter if auto-skip is enabled
-                const skipParam = autoSkipEnabled ? "&skip=true" : "&skip=false";
-                const playerUrl = `<?= $websiteUrl ?>/src/player/${serverType}.php?id=${currentEpisodeId}&server=${serverName}&embed=true&ep=${episodeNumber}${skipParam}`;
-                console.log('Setting player URL:', playerUrl);
-                iframe.src = playerUrl;
-                const pcAutoskipButton = document.querySelector(".pc-autoskip");
-                if (pcAutoskipButton) {
-                    pcAutoskipButton.removeEventListener("click", reloadPlayer); // Remove any existing event listener
-                    pcAutoskipButton.addEventListener("click", reloadPlayer);
-                }
+            console.log(`Preferred server updated: type=${currentServerType}, name=${currentServerName}`);
 
-                function reloadPlayer() {
-                    const skipParam = autoSkipEnabled ? "&skip=true" : "&skip=false";
-                    const playerUrl = `<?= $websiteUrl ?>/src/player/${currentServerType}.php?id=${currentEpisodeId}&server=${serverName}&embed=true&ep=${episodeNumber}${skipParam}`;
-                    console.log('Reloading player URL:', playerUrl);
-                    iframe.src = playerUrl;
-                }
-                localStorage.setItem("selectedServerType", serverType);
-                localStorage.setItem("selectedServerId", serverId);
+            const skipParam = autoSkipEnabled ? "&skip=true" : "&skip=false";
+            const playerUrl = `<?= $websiteUrl ?>/src/player/${currentServerType}.php?id=${currentEpisodeId}&server=${currentServerName}&embed=true&ep=${episodeNumber}${skipParam}`;
+
+            console.log('Setting player URL:', playerUrl);
+            $iframe.attr('src', playerUrl);
+
+            $(".pc-autoskip").off("click").on("click", function() {
+                const reloadUrl = `<?= $websiteUrl ?>/src/player/${currentServerType}.php?id=${currentEpisodeId}&server=${currentServerName}&embed=true&ep=${episodeNumber}${skipParam}`;
+                console.log('Reloading player URL:', reloadUrl);
+                $iframe.attr('src', reloadUrl);
             });
         });
     }
+
+    // Init
+    updateServerList(currentEpisodeId);
+
+
+
+
 
 
     function selectEpisode(episodeNumber) {
-        console.log('Selecting episode:', episodeNumber);
-        const episodeItem = document.querySelector(`.ssl-item[data-number="${episodeNumber}"]`);
-        if (episodeItem) {
-            episodeItem.click();
-            return true;
-        }
-        console.log('Episode not found:', episodeNumber);
-        return false;
+    console.log('Selecting episode:', episodeNumber);
+    const $episodeItem = $(`.ssl-item[data-number="${episodeNumber}"]`);
+    if ($episodeItem.length) {
+        $episodeItem.click();
+        return true;
     }
+    console.log('Episode not found:', episodeNumber);
+    return false;
+}
 
-    function selectFirstEpisode() {
-        console.log('Attempting to select first episode');
-        const firstEpisode = document.querySelector(".ssl-item");
-        if (firstEpisode) {
-            console.log('First episode found, clicking');
-            firstEpisode.click();
-        } else {
-            console.log('No episodes found');
-        }
+function selectFirstEpisode() {
+    console.log('Attempting to select first episode');
+    const $firstEpisode = $(".ssl-item").first();
+    if ($firstEpisode.length) {
+        console.log('First episode found, clicking');
+        $firstEpisode.click();
+    } else {
+        console.log('No episodes found');
     }
+}
 
-    const episodeItems = document.querySelectorAll(".ssl-item");
-    episodeItems.forEach(item => {
-        item.addEventListener("click", async function() {
-            const episodeId = this.getAttribute("data-id");
-            const episodeNumber = this.getAttribute("data-number");
-            currentEpisodeId = episodeId;
-            
-            episodeItems.forEach(ep => ep.classList.remove("active"));
-            this.classList.add("active");
-            
-            const newUrl = `/watch/${animeId}?ep=${episodeNumber}`;
-            history.pushState({}, '', newUrl);
-            
-            const serverNotice = document.querySelector(".server-notice strong");
-            if (serverNotice) {
-                serverNotice.innerHTML = `Currently watching <b>Episode ${episodeNumber}</b>`;
-            }
+const $episodeItems = $(".ssl-item");
+$episodeItems.each(function() {
+    $(this).on("click", async function() {
+        const episodeId = $(this).attr("data-id");
+        const episodeNumber = $(this).attr("data-number");
+        currentEpisodeId = episodeId;
+        
+        $episodeItems.removeClass("active");
+        $(this).addClass("active");
+        
+        const newUrl = `/watch/${animeId}?ep=${episodeNumber}`;
+        history.pushState({}, '', newUrl);
+        
+        const $serverNotice = $(".server-notice strong");
+        if ($serverNotice.length) {
+            $serverNotice.html(`Currently watching <b>Episode ${episodeNumber}</b>`);
+        }
 
-            await updateWatchHistory({
-                episodeNumber: parseInt(episodeNumber)
-            });
-            
-            await updateServerList(episodeId);
-            
-            const firstServer = document.querySelector(`.ps_-block-${currentServerType} .btn-server`);
-            if (firstServer) {
-                firstServer.click();
-            }
-            updateNavigationButtons();
+        await updateWatchHistory({
+            episodeNumber: parseInt(episodeNumber)
         });
+        
+        await updateServerList(episodeId);
+        
+        const $firstServer = $(`.ps_-block-${currentServerType} .btn-server`).first();
+        if ($firstServer.length) {
+            $firstServer.click();
+        }
+        updateNavigationButtons();
     });
+});
 
-    function initializeEpisodeSelection() {
-        console.log('Initializing episode selection');
+function initializeEpisodeSelection() {
+    console.log('Initializing episode selection');
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const epFromUrl = urlParams.get('ep');
+    
+    if (epFromUrl) {
+        console.log('Episode from URL:', epFromUrl);
+        if (!selectEpisode(epFromUrl)) {
+            selectFirstEpisode();
+        }
+    } else {
+        const lastWatchedEp = getLastWatchedEpisode();
+        console.log('Last watched episode:', lastWatchedEp);
         
-        const urlParams = new URLSearchParams(window.location.search);
-        const epFromUrl = urlParams.get('ep');
-        
-        if (epFromUrl) {
-            console.log('Episode from URL:', epFromUrl);
-            if (!selectEpisode(epFromUrl)) {
+        if (lastWatchedEp > 1) {
+            if (!selectEpisode(lastWatchedEp)) {
                 selectFirstEpisode();
             }
         } else {
-            const lastWatchedEp = getLastWatchedEpisode();
-            console.log('Last watched episode:', lastWatchedEp);
-            
-            if (lastWatchedEp > 1) {
-                if (!selectEpisode(lastWatchedEp)) {
-                    selectFirstEpisode();
-                }
-            } else {
-                selectFirstEpisode();
-            }
+            selectFirstEpisode();
         }
     }
+}
 
-    setTimeout(initializeEpisodeSelection, 100);
+setTimeout(initializeEpisodeSelection, 100);
 
-    function updateNavigationButtons() {
-        const currentEpisode = document.querySelector(".ssl-item.active");
-        const prevButton = document.querySelector(".block-prev");
-        const nextButton = document.querySelector(".block-next");
-        
-        if (currentEpisode) {
-            let hasPrev = false;
-            let previousEpisode = currentEpisode.previousElementSibling;
-            while (previousEpisode) {
-                if (previousEpisode.classList.contains("ssl-item")) {
-                    hasPrev = true;
-                    break;
-                }
-                previousEpisode = previousEpisode.previousElementSibling;
-            }
-            
-            let hasNext = false;
-            let nextEpisode = currentEpisode.nextElementSibling;
-            while (nextEpisode) {
-                if (nextEpisode.classList.contains("ssl-item")) {
-                    hasNext = true;
-                    break;
-                }
-                nextEpisode = nextEpisode.nextElementSibling;
-            }
-            
-            prevButton.style.display = hasPrev ? "block" : "none";
-            nextButton.style.display = hasNext ? "block" : "none";
-        }
-    }
-
-    function prevEpisode() {
-        const currentEpisode = document.querySelector(".ssl-item.active");
-        if (currentEpisode) {
-            let previousEpisode = currentEpisode.previousElementSibling;
-            while (previousEpisode && !previousEpisode.classList.contains("ssl-item")) {
-                previousEpisode = previousEpisode.previousElementSibling;
-            }
-            if (previousEpisode) {
-                previousEpisode.click();
-            }
-        }
-    }
-
-    function nextEpisode() {
-        const currentEpisode = document.querySelector(".ssl-item.active");
-        if (currentEpisode) {
-            let nextEpisode = currentEpisode.nextElementSibling;
-            while (nextEpisode && !nextEpisode.classList.contains("ssl-item")) {
-                nextEpisode = nextEpisode.nextElementSibling;
-            }
-            if (nextEpisode) {
-                nextEpisode.click();
-            }
-        }
-    }
-
-    document.querySelector(".btn-prev").addEventListener("click", prevEpisode);
-    document.querySelector(".btn-next").addEventListener("click", nextEpisode);
-
-    // Load watched episodes when page loads
-    loadWatchedEpisodes();
-    // Initialize auto-next feature
-    iframe.addEventListener('load', handleAutoNext);
-});
-
-</script>
-
-<script>
-// Event listener for episode range selection
-document.getElementById('episode-range').addEventListener('change', function() {
-    // Hide all episode pages
-    document.querySelectorAll('.ss-list').forEach(page => {
-        page.style.display = 'none';
-    });
+function updateNavigationButtons() {
+    const $currentEpisode = $(".ssl-item.active");
+    const $prevButton = $(".block-prev");
+    const $nextButton = $(".block-next");
     
-    // Show selected page
-    const selectedPage = document.getElementById('episodes-page-' + (parseInt(this.value) + 1));
-    if (selectedPage) {
-        selectedPage.style.display = 'block';
+    if ($currentEpisode.length) {
+        let hasPrev = false;
+        let $previousEpisode = $currentEpisode.prev();
+        while ($previousEpisode.length) {
+            if ($previousEpisode.hasClass("ssl-item")) {
+                hasPrev = true;
+                break;
+            }
+            $previousEpisode = $previousEpisode.prev();
+        }
+        
+        let hasNext = false;
+        let $nextEpisode = $currentEpisode.next();
+        while ($nextEpisode.length) {
+            if ($nextEpisode.hasClass("ssl-item")) {
+                hasNext = true;
+                break;
+            }
+            $nextEpisode = $nextEpisode.next();
+        }
+        
+        $prevButton.css("display", hasPrev ? "block" : "none");
+        $nextButton.css("display", hasNext ? "block" : "none");
+    }
+}
+
+function prevEpisode() {
+    const $currentEpisode = $(".ssl-item.active");
+    if ($currentEpisode.length) {
+        let $previousEpisode = $currentEpisode.prev();
+        while ($previousEpisode.length && !$previousEpisode.hasClass("ssl-item")) {
+            $previousEpisode = $previousEpisode.prev();
+        }
+        if ($previousEpisode.length) {
+            $previousEpisode.click();
+        }
+    }
+}
+
+function nextEpisode() {
+    const $currentEpisode = $(".ssl-item.active");
+    if ($currentEpisode.length) {
+        let $nextEpisode = $currentEpisode.next();
+        while ($nextEpisode.length && !$nextEpisode.hasClass("ssl-item")) {
+            $nextEpisode = $nextEpisode.next();
+        }
+        if ($nextEpisode.length) {
+            $nextEpisode.click();
+        }
+    }
+}
+
+$(".btn-prev").on("click", prevEpisode);
+$(".btn-next").on("click", nextEpisode);
+
+// Load watched episodes when page loads
+if (typeof loadWatchedEpisodes === 'function') {
+    loadWatchedEpisodes();
+}
+
+$("#iframe-embed").on('load', handleAutoNext);
+
+});
+
+// Event listener for episode range selection
+$(document).ready(function() {
+    const $episodeRange = $('#episode-range');
+    if ($episodeRange.length) {
+        $episodeRange.on('change', function() {
+            // Hide all episode pages
+            $('.ss-list').hide();
+            
+            // Show selected page
+            const selectedPage = $('#episodes-page-' + (parseInt(this.value) + 1));
+            if (selectedPage.length) {
+                selectedPage.show();
+            }
+        });
     }
 });
-</script>
 
-<script>
 // Load watched episodes on initial page load
-document.addEventListener("DOMContentLoaded", async function() {
+$(document).ready(async function() {
     function updateWatchedEpisodeUI(episodeNumber) {
-        const episodeItem = document.querySelector(`.ssl-item[data-number="${episodeNumber}"]`);
-        if (episodeItem && !episodeItem.classList.contains('watched')) {
-            episodeItem.classList.add('watched');
+        const $episodeItem = $(`.ssl-item[data-number="${episodeNumber}"]`);
+        if ($episodeItem.length && !$episodeItem.hasClass('watched')) {
+            $episodeItem.addClass('watched');
         }
     }
 
     try {
-        const animeId = <?= isset($animeData['id']) ? json_encode($animeData['id']) : 'null' ?>; // Corrected to use 'id' instead of 'animeId'
-        const response = await fetch(`/src/ajax/wh-get.php?animeId=${animeId}`); // Fixed template literal syntax
+        const animeId = <?= isset($animeData['id']) ? json_encode($animeData['id']) : 'null' ?>; 
+        const response = await fetch(`/src/ajax/wh-get.php?animeId=${animeId}`); 
         const data = await response.json();
         
         if (data.success && Array.isArray(data.watchedEpisodes)) {
@@ -1187,11 +1150,9 @@ document.addEventListener("DOMContentLoaded", async function() {
         console.error('Error fetching watch history:', error);
     }
 });
-</script>
 
-<script>
 function toggleTheaterMode() {
-    const playerFrame = document.documentElement; 
+    const playerFrame = document.documentElement;
     if (!document.fullscreenElement) {
         playerFrame.requestFullscreen().catch(err => {
             console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
@@ -1200,26 +1161,26 @@ function toggleTheaterMode() {
         document.exitFullscreen();
     }
 }
-document.addEventListener('click', function() {
-    if (document.fullscreenElement) {
-        document.exitFullscreen();
-    }
+
+$(document).ready(function() {
+    const $mediaResizeButton = $('#media-resize');
+    const $expandIcon = $mediaResizeButton.find('i');
+
+    $mediaResizeButton.on('click', function() {
+        toggleTheaterMode();
+    });
+
+    $(document).on('fullscreenchange', function() {
+        if (document.fullscreenElement) {
+            $expandIcon.removeClass('fa-expand').addClass('fa-compress');
+        } else {
+            $expandIcon.removeClass('fa-compress').addClass('fa-expand');
+        }
+    });
 });
 
-const mediaResizeButton = document.querySelector('#media-resize');
-const expandIcon = mediaResizeButton.querySelector('i');
 
-mediaResizeButton.addEventListener('click', function() {
-    if (document.fullscreenElement) {
-        expandIcon.classList.remove('fa-compress');
-        expandIcon.classList.add('fa-expand'); 
-    } else {
-        expandIcon.classList.remove('fa-expand');
-        expandIcon.classList.add('fa-compress'); 
-    }
-});
 </script>
-
 
     </div>
 </body>

@@ -2,29 +2,43 @@
 session_start();
 require_once($_SERVER['DOCUMENT_ROOT'] . '/_config.php');
 
+
+
 define('BASE_API_URL', $zpi);
 $endpoint = '';
 $apiUrl = BASE_API_URL . $endpoint;
-$response = file_get_contents($apiUrl);
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$response = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    echo 'Curl error: ' . curl_error($ch);
+    exit;
+}
+curl_close($ch);
+
 $data = json_decode($response, true);
 
 if (!$data || !$data['success']) {
     echo "Muhehehe! API request failed and no cache available.";
     exit;
 }
+
 $data = $data['results'];
 ?>
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-    <title><?= $websiteTitle ?> #1 Watch High Quality Anime Online Without Ads</title>
+    <title><?= $websiteTitle ?> Free Anime Streaming</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="title"
-        content="<?= $websiteTitle ?> #1 Watch High Quality Anime Online Without Ads" />
+        content="Watch Anime Online, Free Anime Streaming Online on <?= $websiteTitle ?> Anime Website" />
     <meta name="description"
-        content="<?= $websiteTitle ?> #1 Watch High Quality Anime Online Without Ads. You can watch anime online free in HD without Ads. Best place for free find and one-click anime." />
+        content="<?= $websiteTitle ?> is a Free anime streaming website which you can watch English Subbed and Dubbed Anime online with No Account and Daily update. WATCH NOW!" />
     <meta name="keywords"
         content="<?= $websiteTitle ?>, watch anime online, free anime, anime stream, anime hd, anipaca, alpaca, apaca, palahat, pacahat, rahat, raisul rahat, anpaca, pacatv, english sub, kissanime, gogoanime, animeultima, 9anime, 123animes, vidstreaming, gogo-stream, animekisa, zoro.to, gogoanime.run, animefrenzy, animekisa" />
     <meta name="charset" content="UTF-8" />
@@ -33,9 +47,9 @@ $data = $data['results'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="Content-Language" content="en" />
     <meta property="og:title"
-        content="<?= $websiteTitle ?> #1 Watch High Quality Anime Online Without Ads">
+        content="Watch Anime Online, Free Anime Streaming Online on <?= $websiteTitle ?> Anime Website">
     <meta property="og:description"
-        content="<?= $websiteTitle ?> #1 Watch High Quality Anime Online Without Ads. You can watch anime online free in HD without Ads. Best place for free find and one-click anime.">
+        content="Watch Anime Online, Free Anime Streaming Online on <?= $websiteTitle ?> Anime Website. You can watch anime online free in HD without Ads. Best place for free find and one-click anime.">
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="<?= $websiteTitle ?>">
@@ -114,8 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.lazy-component').forEach(el => lazyObserver.observe(el));
 });
 </script>
-<img src="https://anipaca.fun/yamete.php?domain=<?= urlencode($_SERVER['HTTP_HOST']) ?>&trackingId=UwU" style="width:0; height:0; visibility:hidden;">
-<script defer src="https://platform-api.sharethis.com/js/sharethis.js#property=67521dcc10699f0019237fbb&product=inline-share-buttons&source=platform"></script>
+
+    <!-- Enhanced ShareThis integration -->
+    <script src="<?=$websiteUrl?>/src/assets/js/share-enhanced.js"></script>
 <script defer src="<?=$websiteUrl?>/src/assets/js/search.js"></script>
 
 

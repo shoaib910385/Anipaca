@@ -1,31 +1,32 @@
 <?php 
 
-$conn = new mysqli("HOSTNAME", "USERNAME", "PASSWORD", "DATABASE");
+$conn = new mysqli("localhost", "user", "pass", "db_name"); //just like $conn = new mysqli("localhost", "root", "", "anipaca");
+
 
 if ($conn->connect_error) {
     error_log("Database connection failed: " . $conn->connect_error);
-    die("Database connection failed.");
+    echo("Database connection failed.");
 }
 
-$websiteTitle = "AniPaca";
+$websiteTitle = "Anipaca";
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
 $websiteUrl = "{$protocol}://{$_SERVER['SERVER_NAME']}";
 $websiteLogo = $websiteUrl . "/public/logo/logo.png";
-$contactEmail = "@gmail.com";
+$contactEmail = "Anipaca@gmail.com";
 
-$version = "2.1";
+$version = "1.0.2";
 
-$discord = "https://dcd.gg/anipaca";
-$github = "https://github.com/PacaHat";
-$telegram = "https://t.me/anipaca";
-$instagram = "https://www.instagram.com/pxr15_"; 
+$discord = "https://dcd.gg/Anipaca";
+$github = "https://github.com/Anipaca";
+$telegram = "https://t.me/Anipaca";
+$instagram = "https://www.instagram.com/Anipaca"; 
 
 // all the api you need
-$zpi = "https://your-hosted-api.com/api"; //https://github.com/PacaHat/zen-api
-$proxy = $websiteUrl . "/src/ajax/proxy.php?url=";
+$zpi = "https://zen-api.vercel.app/api"; //https://github.com/PacaHat/zen-api
+//$proxy = $websiteUrl . "/src/ajax/proxy.php?url=";
 
-//If you want faster loading speed
-//$proxy = "https://your-hosted-proxy.com/api/v1/streamingProxy?url="; //https://github.com/MetaHat/m3u8-streaming-proxy
+//If you want faster loading speed just put // before the first proxy and remove slashes from this one 
+$proxy = "https://proxy.vercel.app/proxy?url="; //https://github.com/PacaHat/shrina-proxy
 
 
 $banner = $websiteUrl . "/public/images/banner.png";
