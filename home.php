@@ -61,7 +61,6 @@ $data = $data['results'];
     <meta property="og:image:height" content="350">
     <meta name="apple-mobile-web-app-status-bar" content="#202125">
     <meta name="theme-color" content="#202125">
-    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/min.css?v=<?= $version ?>">
     <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/styles.min.css?v=<?= $version ?>">
     <link rel="apple-touch-icon" href="<?= $websiteUrl ?>/public/logo/favicon.png?v=<?= $version ?>" />
     <link rel="shortcut icon" href="<?= $websiteUrl ?>/public/logo/favicon.png?v=<?= $version ?>" type="image/x-icon" />
@@ -71,67 +70,21 @@ $data = $data['results'];
     <link rel="mask-icon" href="<?= $websiteUrl ?>/public/logo/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="icon" sizes="192x192" href="<?= $websiteUrl ?>/public/logo/touch-icon-192x192.png?v=<?= $version ?>">
     <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/new.css?v=<?= $version ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/search.css">
+    <script src="<?= $websiteUrl ?>/src/assets/js/search.js"></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="<?=$websiteUrl?>/src/assets/css/search.css">
-
-<noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-</noscript>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Dynamically load CSS files after delay
-    setTimeout(() => {
-        const cssFiles = [
-            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css',
-            'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'
-        ];
-        const firstLink = document.querySelector('link[rel=stylesheet]');
-        cssFiles.forEach(file => {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = `${file}?v=<?= $version ?>`;
-            link.type = 'text/css';
-            firstLink.parentNode.insertBefore(link, firstLink);
-        });
-
-        // Native lazy loading support
-        if ('loading' in HTMLImageElement.prototype) {
-            document.querySelectorAll('img').forEach(img => {
-                img.loading = 'lazy';
-            });
-        } else {
-            // Fallback using Lozad.js
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js';
-            script.onload = () => {
-                const observer = lozad();
-                observer.observe();
-            };
-            document.body.appendChild(script);
-        }
-    }, 500);
-
-    // Lazy load components
-    const lazyObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('loaded');
-                lazyObserver.unobserve(entry.target);
-            }
-        });
-    });
-    document.querySelectorAll('.lazy-component').forEach(el => lazyObserver.observe(el));
-});
-</script>
-
-<script defer src="https://platform-api.sharethis.com/js/sharethis.js#property=67521dcc10699f0019237fbb&product=inline-share-buttons&source=platform"></script>
-<script defer src="<?=$websiteUrl?>/src/assets/js/search.js"></script>
-
+    <noscript>
+        <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css>
+        <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css>
+    </noscript>
+    <script>const cssFiles = ["https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css", "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"], firstLink = document.getElementsByTagName("link")[0]; cssFiles.forEach((s => { const t = document.createElement("link"); t.rel = "stylesheet", t.href = `${s}?v=<?= $version ?>`, t.type = "text/css", firstLink.parentNode.insertBefore(t, firstLink) }))</script>
+    <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css>
+    <link rel=stylesheet href=https://use.fontawesome.com/releases/v5.3.1/css/all.css>
+    <link rel=stylesheet href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
 
 </head>
 <body data-page="page_home">
@@ -257,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <?php include('./src/component/footer.php'); ?>
         <div id="mask-overlay"></div>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js">
         </script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
@@ -267,11 +219,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/jquery-ui.css">
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/function.js"></script>
-
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <script src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/pre-qtip.js"></script>
+        
     </div>
 </body>
 

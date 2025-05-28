@@ -197,7 +197,7 @@ if ($user_id) {
                 <div class="cw_list" id="comments-list">
                     <div class="comment">
                         <div class="comment-avatar">
-                            <img class="comment-avatar-img" src="user_avatar_url" alt="username">
+                            <img class="comment-avatar-img" src="/public/images/no-avatar.jpeg" alt="username">
                         </div>
                         <div class="comment-body">
                             <div class="comment-info">

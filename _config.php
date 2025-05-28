@@ -1,7 +1,6 @@
 <?php 
 
-$conn = new mysqli("HOSTNAME", "USERNAME", "PASSWORD", "DATABASE"); //just like $conn = new mysqli("localhost", "root", "", "anipaca");
-
+$conn = new mysqli("localhost", "anipacaf_paca", "anipacaf_paca", "anipacaf_gitpaca");
 
 if ($conn->connect_error) {
     error_log("Database connection failed: " . $conn->connect_error);
@@ -22,7 +21,7 @@ $telegram = "https://t.me/anipaca";
 $instagram = "https://www.instagram.com/pxr15_"; 
 
 // all the api you need
-$zpi = "https://your-hosted-api.com/api"; //https://github.com/PacaHat/zen-api
+$zpi = "https://z.pacalabs.top/api"; //https://github.com/PacaHat/zen-api
 $proxy = $websiteUrl . "/src/ajax/proxy.php?url=";
 
 //If you want faster loading speed just put // before the first proxy and remove slashes from this one 

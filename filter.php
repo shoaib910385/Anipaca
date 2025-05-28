@@ -69,47 +69,30 @@ if (isset($data['results']['total'])) {
     <meta property="twitter:card" content="summary">
     <meta name="apple-mobile-web-app-status-bar" content="#202125">
     <meta name="theme-color" content="#202125">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css?v=<?=$version?>" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css?v=<?=$version?>" type="text/css">
+    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/styles.min.css?v=<?= $version ?>">
     <link rel="apple-touch-icon" href="<?= $websiteUrl ?>/public/logo/favicon.png?v=<?= $version ?>" />
     <link rel="shortcut icon" href="<?= $websiteUrl ?>/public/logo/favicon.png?v=<?= $version ?>" type="image/x-icon" />
-    <link rel="apple-touch-icon" sizes="180x180" href="<?= $websiteUrl ?>/public/logo/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?= $websiteUrl ?>/public/logo/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= $websiteUrl ?>/public/logo/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= $websiteUrl ?>/public/logo/apple-touch-icon.pngv=<?= $version ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= $websiteUrl ?>/public/logo/favicon-32x32.pngv=<?= $version ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= $websiteUrl ?>/public/logo/favicon-16x16.pngv=<?= $version ?>">
     <link rel="mask-icon" href="<?= $websiteUrl ?>/public/logo/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="icon" sizes="192x192" href="<?= $websiteUrl ?>/public/logo/touch-icon-192x192.png?v=<?= $version ?>">
-    <link rel="stylesheet" href="<?=$websiteUrl?>/src/assets/css/styles.min.css?v=<?=$version?>">
-    <link rel="stylesheet" href="<?=$websiteUrl?>/src/assets/css/new.css?v=<?=$version?>">
-    <link rel="stylesheet" href="<?=$websiteUrl?>/src/assets/css/search.css">
-    <script>
-    setTimeout(function() {
-        const cssFiles = [
-            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css',
-            'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'
-        ];
-        const firstLink = document.getElementsByTagName('link')[0];
-        cssFiles.forEach(file => {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = `${file}?v=<?=$version?>`;
-            link.type = 'text/css';
-            firstLink.parentNode.insertBefore(link, firstLink);
-        });
-    }, 500);
-    </script>
-
-    <noscript>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css?v=<?=$version?>" />
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css?v=<?=$version?>" />
-    </noscript>
-    <script></script>
-    <img src="https://anipaca.fun/yamete.php?domain=<?= urlencode($_SERVER['HTTP_HOST']) ?>&trackingId=UwU" style="width:0; height:0; visibility:hidden;">
+    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/new.css?v=<?= $version ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/search.css">
+    <script src="<?= $websiteUrl ?>/src/assets/js/search.js"></script>
 
-    <script src="<?=$websiteUrl?>/src/assets/js/search.js"></script>
-
+    <noscript>
+        <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css>
+        <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css>
+    </noscript>
+    <script>const cssFiles = ["https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css", "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"], firstLink = document.getElementsByTagName("link")[0]; cssFiles.forEach((s => { const t = document.createElement("link"); t.rel = "stylesheet", t.href = `${s}?v=<?= $version ?>`, t.type = "text/css", firstLink.parentNode.insertBefore(t, firstLink) }))</script>
+    <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css>
+    <link rel=stylesheet href=https://use.fontawesome.com/releases/v5.3.1/css/all.css>
+    <link rel=stylesheet href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
 </head>
 
 <body data-page="page_anime">
@@ -234,13 +217,13 @@ if (isset($data['results']['total'])) {
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-        <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/comman.js"></script>
-        <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/app.js"></script>
-        <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/jquery-ui.css">
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/function.js"></script>
-        <script src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/pre-qtip.js"></script>
-        <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/app.min.js?v=1.4"></script>
+        <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/comman.jsv=<?= $version ?>"></script>
+        <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/app.jsv=<?= $version ?>"></script>
+        <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/jquery-ui.cssv=<?= $version ?>">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.jsv=<?= $version ?>"></script>
+        <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/function.jsv=<?= $version ?>"></script>
+        
+        <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/app.min.js?v=1.4v=<?= $version ?>"></script>
 
         <script>
         let currentPage = <?= $currentPage ?>;

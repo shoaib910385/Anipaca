@@ -12,7 +12,7 @@
                             </div>
                             <div class="deslide-item-content">
                                 <div class="desi-sub-text">#<?= $index + 1 ?> Spotlight</div>
-                                <div class="desi-head-title dynamic-name" data-jname="<?= htmlspecialchars($anime['japanese_title']) ?>"><?= htmlspecialchars($anime['title']) ?></div>
+                                <div class="desi-head-title dynamic-name" data-jname="<?= htmlspecialchars($anime[' jname']) ?>"><?= htmlspecialchars($anime['title']) ?></div>
                                 <div class="sc-detail">
                                     <div class="scd-item"><i class="fas fa-play-circle mr-1"></i>&nbsp;<?= htmlspecialchars($anime['tvInfo']['showType']) ?></div>
                                     <div class="scd-item"><i class="fas fa-clock mr-1"></i>&nbsp;<?= htmlspecialchars($anime['tvInfo']['duration']) ?></div>

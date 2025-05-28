@@ -26,7 +26,7 @@
                                            title="<?php echo htmlspecialchars($anime['title']); ?>"
                                            class="dynamic-name anime-toggle"
                                            data-en="<?php echo htmlspecialchars($anime['title']); ?>"
-                                           data-jp="<?php echo htmlspecialchars($anime['japanese_title']); ?>"
+                                           data-jp="<?php echo htmlspecialchars($anime[' jname']); ?>"
                                            style="opacity: 1;">
                                             <?php echo htmlspecialchars($anime['title']); ?>
                                         </a>
@@ -90,7 +90,7 @@
                                            title="<?php echo htmlspecialchars($anime['title']); ?>"
                                            class="dynamic-name anime-toggle"
                                            data-en="<?php echo htmlspecialchars($anime['title']); ?>"
-                                           data-jp="<?php echo htmlspecialchars($anime['japanese_title']); ?>"
+                                           data-jp="<?php echo htmlspecialchars($anime[' jname']); ?>"
                                            style="opacity: 1;">
                                             <?php echo htmlspecialchars($anime['title']); ?>
                                         </a>
@@ -153,7 +153,7 @@
                                            title="<?php echo htmlspecialchars($anime['title']); ?>"
                                            class="dynamic-name anime-toggle"
                                            data-en="<?php echo htmlspecialchars($anime['title']); ?>"
-                                           data-jp="<?php echo htmlspecialchars($anime['japanese_title']); ?>"
+                                           data-jp="<?php echo htmlspecialchars($anime[' jname']); ?>"
                                            style="opacity: 1;">
                                             <?php echo htmlspecialchars($anime['title']); ?>
                                         </a>
@@ -218,7 +218,7 @@
                                            title="<?php echo htmlspecialchars($anime['title']); ?>"
                                            class="dynamic-name anime-toggle"
                                            data-en="<?php echo htmlspecialchars($anime['title']); ?>"
-                                           data-jp="<?php echo htmlspecialchars($anime['japanese_title']); ?>"
+                                           data-jp="<?php echo htmlspecialchars($anime[' jname']); ?>"
                                            style="opacity: 1;">
                                             <?php echo htmlspecialchars($anime['title']); ?>
                                         </a>

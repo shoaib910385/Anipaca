@@ -1,44 +1,49 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/_config.php');
 
-$id = $_GET['id'];
+header('X-Frame-Options: SAMEORIGIN');
+header("Content-Security-Policy: frame-ancestors 'self';");
+
+
+$rawId = $_GET['id'];
+$parsed = explode('?', urldecode($rawId));
+$id = $parsed[0];
+parse_str($parsed[1] ?? '', $extraParams);
+$epId = $extraParams['ep'] ?? ($_GET['ep'] ?? null);
+
 $server = $_GET['server'] ?? 'hd-1';
-$useProxy = $server !== 'hd-1';
-$isIframe = isset($_GET['embed']) && $_GET['embed'] === 'true';
+$isPlay = isset($_GET['embed']) && $_GET['embed'] === 'true';
 $autoSkip = isset($_GET['skip']) && $_GET['skip'] === 'true';
+$isIframe = ($server === 'Fast' && $isPlay);
+$embd_url = "https://megaplay.buzz/stream/s-2/{$epId}/sub";
+
+if ($isIframe) {
+    echo '<iframe src="' . $embd_url . '" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen></iframe>';
+    exit;
+}
 
 $categories = ["sub", "raw"];
 $data = null;
+$ch = curl_init();
 
 foreach ($categories as $category) {
-    $api_url = "$zpi/stream?id=$id&server=$server&type=$category";
-    $response = file_get_contents($api_url);
+    $api_url = "$zpi/stream?id={$rawId}&server={$server}&type={$category}";
+    curl_setopt($ch, CURLOPT_URL, $api_url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
     if ($response !== false) {
         $data = json_decode($response, true);
         if ($data && $data['success'] && isset($data['results']['streamingLink'])) {
-            break; // Stop if a successful response is found
+            break;
         }
     }
 }
+curl_close($ch);
 
-if (!$data || !$data['success'] || !isset($data['results']['streamingLink'])) {
-    die("Error: Unable to fetch episode sources or invalid response structure.");
-}
 
-// Process new API response structure
 $streamingData = $data['results']['streamingLink'];
-
-// Check if link exists and has file
-if (!isset($streamingData['link']['file'])) {
-    die("Error: No streaming link found in response.");
-}
-
 $m3u8_url = $streamingData['link']['file'];
-$video_url = $server === 'HD-3' 
-    ? "{$proxy}{$m3u8_url}&headers=%7B%22Referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D" 
-    : ($useProxy ? $proxy . $m3u8_url : $m3u8_url);
-    
-// Set default values for intro/outro
+$video_url = "{$proxy}{$m3u8_url}&headers=%7B%22Referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D";
 $intro_start = $streamingData['intro']['start'] ?? 0;
 $intro_end = $streamingData['intro']['end'] ?? 0;
 $outro_start = $streamingData['outro']['start'] ?? 0;
@@ -46,15 +51,14 @@ $outro_end = $streamingData['outro']['end'] ?? 0;
 $thumbnail_url = null;
 $subtitles = [];
 
-// Process tracks if they exist
 if (isset($streamingData['tracks']) && is_array($streamingData['tracks'])) {
     foreach ($streamingData['tracks'] as $track) {
         if (!isset($track['kind'])) continue;
-        
+
         if ($track['kind'] === 'thumbnails') {
             $thumbnail_url = $track['file'] ?? null;
         } elseif ($track['kind'] === 'captions') {
-            $isEnglish = stripos($track['label'] ?? '', 'English') !== false || 
+            $isEnglish = stripos($track['label'] ?? '', 'English') !== false ||
                          stripos($track['label'] ?? '', 'eng') !== false ||
                          (isset($track['default']) && $track['default'] === true);
             $subtitles[] = [
@@ -66,12 +70,10 @@ if (isset($streamingData['tracks']) && is_array($streamingData['tracks'])) {
     }
 }
 
-// Rest of your code...
 
-if ($isIframe) {
-    ?>
+if ($isPlay) {
+?>
     <div class="artplayer-app"></div>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/artplayer.js"></script>
     <script src="js/hls.js"></script>
     <script src="js/artplayer-plugin-chromecast.js"></script>
