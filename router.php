@@ -22,6 +22,7 @@ $routes = [
   '/^filter$/' => 'filter.php',
   '/^search$/' => 'search.php',
   '/^az-list(?:\/[a-zA-Z0-9-]+)?$/' => 'src/pages/anime/az-list.php',
+  '/^db$/' => 'db-init.php',
 
   // Anime Pages
   '/^details$/' => 'src/pages/anime/details.php',
@@ -45,9 +46,11 @@ $routes = [
   '/^changepass$/' => 'src/user/changepass.php',
   '/^continue-watching$/' => 'src/user/continue-watching.php',
 
-  // Extra Pages
-  '/^dmca$/' => 'src/pages/extra/dmca.php',
-  '/^terms$/' => 'src/pages/extra/terms.php',
+
+
+    // Extra Pages
+    '/^dmca$/' => 'src/pages/extra/dmca.php',
+    '/^terms$/' => 'src/pages/extra/terms.php',
 
   // Sitemap Routes
   '/^sitemaps\/popular\.xml$/' => 'public/sitemap/sitemappopular.xml',

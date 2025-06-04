@@ -95,12 +95,12 @@ if ($data['success']) {
                             <li class="<?php echo $anime['number'] <= 3 ? 'item-top' : ''; ?>">
                                 <div class="film-number"><span><?php echo $anime['number']; ?></span></div>
                                 <div class="film-poster item-qtip" data-id="<?php echo $anime['data_id']; ?>">
-                                    <img data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['japanese_title']; ?>">
+                                    <img data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['jname']; ?>">
                                 </div>
                                 <div class="film-detail">
                                     <h3 class="film-name">
-                                        <a href="/details/<?php echo $anime['id']; ?>" title="<?php echo $anime['japanese_title']; ?>" 
-                                           class="dynamic-name" data-jname="<?php echo $anime['japanese_title']; ?>">
+                                        <a href="/details/<?php echo $anime['id']; ?>" title="<?php echo $anime['jname']; ?>" 
+                                           class="dynamic-name" data-jname="<?php echo $anime['jname']; ?>">
                                             <?php echo $anime['title']; ?>
                                         </a>
                                     </h3>
@@ -135,12 +135,12 @@ if ($data['success']) {
                             <li class="<?php echo $anime['number'] <= 3 ? 'item-top' : ''; ?>">
                                 <div class="film-number"><span><?php echo $anime['number']; ?></span></div>
                                 <div class="film-poster item-qtip" data-id="<?php echo $anime['data_id']; ?>">
-                                    <img data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['japanese_title']; ?>">
+                                    <img data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['jname']; ?>">
                                 </div>
                                 <div class="film-detail">
                                     <h3 class="film-name">
-                                        <a href="/details/<?php echo $anime['id']; ?>" title="<?php echo $anime['japanese_title']; ?>" 
-                                           class="dynamic-name" data-jname="<?php echo $anime['japanese_title']; ?>">
+                                        <a href="/details/<?php echo $anime['id']; ?>" title="<?php echo $anime['jname']; ?>" 
+                                           class="dynamic-name" data-jname="<?php echo $anime['jname']; ?>">
                                             <?php echo $anime['title']; ?>
                                         </a>
                                     </h3>
@@ -175,12 +175,12 @@ if ($data['success']) {
                             <li class="<?php echo $anime['number'] <= 3 ? 'item-top' : ''; ?>">
                                 <div class="film-number"><span><?php echo $anime['number']; ?></span></div>
                                 <div class="film-poster item-qtip" data-id="<?php echo $anime['data_id']; ?>">
-                                    <img data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['japanese_title']; ?>">
+                                    <img data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['jname']; ?>">
                                 </div>
                                 <div class="film-detail">
                                     <h3 class="film-name">
-                                        <a href="/details/<?php echo $anime['id']; ?>" title="<?php echo $anime['japanese_title']; ?>" 
-                                           class="dynamic-name" data-jname="<?php echo $anime['japanese_title']; ?>">
+                                        <a href="/details/<?php echo $anime['id']; ?>" title="<?php echo $anime['jname']; ?>" 
+                                           class="dynamic-name" data-jname="<?php echo $anime['jname']; ?>">
                                             <?php echo $anime['title']; ?>
                                         </a>
                                     </h3>

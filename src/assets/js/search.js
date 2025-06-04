@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <img src="${anime.poster}" class="film-poster-img" alt="${anime.title}">
                             </div>
                             <div class="srp-detail">
-                                <h3 class="film-name" data-jname="${anime.japanese_title || ''}">${anime.title || 'Untitled'}</h3>
-                                <div class="alias-name">${anime.japanese_title || ''}</div>
+                                <h3 class="film-name" data-jname="${anime.jname || ''}">${anime.title || 'Untitled'}</h3>
+                                <div class="alias-name">${anime.jname || ''}</div>
                                 <div class="film-infor">
                                     <span>${anime.tvInfo?.rating || ''}</span><i class="dot"></i>${anime.tvInfo?.showType || ''}<i class="dot"></i><span>${anime.duration || ''}</span>
                                 </div>

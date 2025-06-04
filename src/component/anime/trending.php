@@ -16,7 +16,7 @@
                                         <div class="item">
                                             <div class="number">
                                                 <span><?= htmlspecialchars($item['number']) ?></span>
-                                            <div class="film-title dynamic-name" data-title="<?= htmlspecialchars($item['title']) ?>" data-jname="<?= htmlspecialchars($item['japanese_title']) ?>">
+                                            <div class="film-title dynamic-name" data-title="<?= htmlspecialchars($item['title']) ?>" data-jname="<?= htmlspecialchars($item['jname']) ?>">
                                                 <?= htmlspecialchars($item['title']) ?>
                                             </div>
                                         </div>

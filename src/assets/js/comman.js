@@ -9,7 +9,7 @@ function smap(url) {
 function toggleAnimeName() {
     $('.dynamic-name').each(function() {
         var currentName = $(this).text()
-          , jName = $(this).data('jname')
+          ,jname = $(this).data('jname')
           , _this = $(this);
         _this.animate({
             'opacity': 0

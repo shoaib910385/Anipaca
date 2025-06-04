@@ -26,6 +26,7 @@ const urlsToCache = [
 
 // Install event - caching the assets with error handling
 self.addEventListener('install', event => {
+    console.log('Service worker installed'); // Add this line
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
@@ -49,6 +50,7 @@ self.addEventListener('install', event => {
 
 // Fetch event - serving cached content when offline with improved error handling
 self.addEventListener('fetch', event => {
+
     // Check if the request is for ShareThis domains
     const url = new URL(event.request.url);
     if (BYPASS_DOMAINS.some(domain => url.hostname.includes(domain))) {
@@ -59,8 +61,8 @@ self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
             .then(response => {
-                // Cache hit - return response
                 if (response) {
+                    console.log('Cache hit for:', event.request.url); // Add this line
                     return response;
                 }
 
@@ -93,19 +95,23 @@ caches.open(CACHE_NAME)
                     // For other resources, return a simple error response
                     return new Response('Offline content not available');
                 });
+
+                console.log('Cache miss for:', event.request.url); // Add this line
+                return fetch(event.request);
             })
     );
 });
 
 // Activate event - cleaning up old caches
 self.addEventListener('activate', event => {
+    console.log('Service worker activated'); // Add this line
     const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cacheName => {
                     if (cacheWhitelist.indexOf(cacheName) === -1) {
-                        console.log('Deleting old cache:', cacheName);
+
                         return caches.delete(cacheName);
                     }
                 })

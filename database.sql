@@ -114,3 +114,7 @@ ALTER TABLE `comments`
 ALTER TABLE `comment_reactions`
     ADD CONSTRAINT `comment_reactions_ibfk_1` FOREIGN KEY(`comment_id`) REFERENCES `comments`(`id`) ON DELETE CASCADE,
     ADD CONSTRAINT `comment_reactions_ibfk_2` FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE;
+
+ALTER TABLE `comments`
+ADD `is_spoiler` TINYINT(1) DEFAULT 0 AFTER `content`,
+ADD INDEX `idx_comments_created_at` (`created_at`);
