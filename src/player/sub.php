@@ -255,7 +255,7 @@ if ($isPlay) {
             layers: [
                 {
             name: 'poster',
-            html: `<img style="width: 35px" src="https://anipaca.fun/public/logo/plogo.php">`,
+            html: `<img style="width: 35px" src="https://hianimez.to/images/share-icon.gif">`,
             tooltip: 'Poster Tip',
             style: {
                 position: 'absolute',
