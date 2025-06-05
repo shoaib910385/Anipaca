@@ -50,16 +50,20 @@
                                                         data-src="<?= $anime['poster'] ?>"
                                                         src="<?= $websiteUrl ?>/public/images/no_poster.jpg"
                                                         alt="<?= $anime['title'] ?>">
-                                                    <a class="film-poster-ahref"
+                                                    <a class="-poster-ahref"
                                                         href="/details/<?= $anime['id'] ?>"
                                                         title="<?= $anime['title'] ?>"
                                                         data-jname="<?= $anime['title'] ?>"><i class="fas fa-play"></i></a>
                                                 </div>
-                                                <div class="film-detail">
+                                                <div class="-detail">
                                                     <h3 class="film-name">
-                                                        <a href="/details/<?= $anime['id'] ?>"
-                                                            title="<?= $anime['title'] ?>"
-                                                            data-jname="<?= $anime['title'] ?>"><?= $anime['title'] ?></a>
+                                                      <a href="/details/<?= $anime['id'] ?>"
+                                                       title="<?= htmlspecialchars($anime['title']) ?>"
+                                                       class="dynamic-name anime-toggle"
+                                                       data-en="<?= htmlspecialchars($anime['title']) ?>"
+                                                       data-jp="<?= htmlspecialchars($anime['jname']) ?>">
+                                                      <?= htmlspecialchars($anime['title']) ?>
+                                                      </a>
                                                     </h3>
                                                     <div class="fd-infor">
                                                        
