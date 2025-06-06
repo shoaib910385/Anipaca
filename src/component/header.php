@@ -257,6 +257,7 @@
                     <div class="hst-icon"><i class="fa-solid fa-fire"></i></div>
                     <div class="name"><span>Popular</span></div>
                 </a>
+
                 
                 <div class="hst-item" style="cursor: pointer;" onclick="toggleLanguage()">
   <div class="hst-icon"><i class="fas fa-language"></i></div>
@@ -266,6 +267,14 @@
 </div>
 
                 
+
+                <div class="hst-item" style="cursor: pointer;" onclick="toggleLanguage()">
+                  <div class="hst-icon"><i class="fas fa-language"></i></div>
+                  <div class="name">
+                    <span id="languageToggle">JP</span>
+                  </div>
+                </div>
+
                 <a href="<?= $websiteUrl ?>/anime/movie" class="hst-item" data-toggle="tooltip"
                     data-original-title="Anime Movies">
                     <div class="hst-icon"><i class="fa-solid fa-clapperboard"></i></div>
