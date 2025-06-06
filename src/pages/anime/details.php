@@ -307,7 +307,7 @@ $characterDataJson = json_encode($characterData, JSON_PRETTY_PRINT);
                                     </div>
                                     <div class="item item-title">
                                         <span class="item-head">Japanese:</span>
-                                        <span class="name"><?= htmlspecialchars($animeData['japanese']) ?></span>
+                                        <span class="name"><?= htmlspecialchars($animeData['japanese'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                                     </div>
                                     <div class="item item-title">
                                         <span class="item-head">Synonyms:</span>
