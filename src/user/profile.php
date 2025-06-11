@@ -91,68 +91,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WI
     <meta name="apple-mobile-web-app-status-bar" content="#202125">
     <meta name="theme-color" content="#202125">
     <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/styles.min.css?v=<?= $version ?>">
-    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/min.css?v=<?= $version ?>">
     <link rel="apple-touch-icon" href="<?= $websiteUrl ?>/public/logo/favicon.png?v=<?= $version ?>" />
     <link rel="shortcut icon" href="<?= $websiteUrl ?>/public/logo/favicon.png?v=<?= $version ?>" type="image/x-icon" />
     <link rel="apple-touch-icon" sizes="180x180" href="<?= $websiteUrl ?>/public/logo/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?= $websiteUrl ?>/public/logo/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?= $websiteUrl ?>/public/logo/favicon-16x16.png">
     <link rel="mask-icon" href="<?= $websiteUrl ?>/public/logo/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="icon" sizes="192x192" href="<?= $websiteUrl ?>/public/logo/touch-icon-192x192.png">
+    <link rel="icon" sizes="192x192" href="<?= $websiteUrl ?>/public/logo/touch-icon-192x192.png?v=<?= $version ?>">
     <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/new.css?v=<?= $version ?>">
-    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/profile.css?v=<?= $version ?>">
-    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/search.css">
-    <script src="<?= $websiteUrl ?>/src/assets/js/search.js"></script>
-    <script src="<?= $websiteUrl ?>/src/assets/js/function.js"></script>
-     
-    <script>
-    setTimeout(function() {
-    const cssFiles = [
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'
-    ];
-    const firstLink = document.getElementsByTagName('link')[0];
-    cssFiles.forEach(file => {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = `${file}?v=<?=$version?>`;
-        link.type = 'text/css';
-        firstLink.parentNode.insertBefore(link, firstLink);
-                });
-        }, 500);
-    </script>
-
-    <noscript>
-        <link rel="stylesheet" type="text/css"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
-        <link rel="stylesheet" type="text/css"
-            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-    </noscript>
-
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- Enhanced ShareThis integration -->
-    <script src="<?=$websiteUrl?>/src/assets/js/share-enhanced.js"></script>
+    <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/search.css">
+    <script src="<?= $websiteUrl ?>/src/assets/js/search.js"></script>
 
-    <link rel="stylesheet" href="<?=$websiteUrl?>/src/assets/css/search.css">
-    <script src="<?=$websiteUrl?>/src/assets/js/search.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/app.js"></script>
-    <script src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/comman.js"></script>
-    <script src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/movie.js"></script>
-    <link rel="stylesheet" href="<?= htmlspecialchars($websiteUrl) ?>/src/assets/css/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="<?= htmlspecialchars($websiteUrl) ?>/src/assets/js/function.js"></script>
-    
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <noscript>
+        <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css>
+        <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css>
+    </noscript>
+    <script>const cssFiles = ["https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css", "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"], firstLink = document.getElementsByTagName("link")[0]; cssFiles.forEach((s => { const t = document.createElement("link"); t.rel = "stylesheet", t.href = `${s}?v=<?= $version ?>`, t.type = "text/css", firstLink.parentNode.insertBefore(t, firstLink) }))</script>
+    <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css>
+    <link rel=stylesheet href=https://use.fontawesome.com/releases/v5.3.1/css/all.css>
+    <link rel=stylesheet href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 
@@ -307,8 +267,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WI
               e.preventDefault();
 
               $('#profile-loading').show();
-              
-          
+
               var formData = new FormData(this);
               formData.append('submit', 1); 
               $.ajax({
@@ -321,15 +280,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WI
                   success: function(response) {
                       $('#profile-loading').hide();
                       if(response.status === 'success') {
-                          alert('Profile updated successfully!');
-                          window.location.reload();
+                         toastr.success('Profile updated successfully!');
+                          setTimeout(function() {
+                            window.location.reload();
+                          }, 1500);
                       } else {
-                          alert('Error: ' + (response.message || 'Unknown error occurred'));
+                         toastr.error('Error: ' + (response.message || 'Unknown error occurred'));
                       }
                   },
                   error: function(xhr, status, error) {
                       $('#profile-loading').hide();
-                      alert('An error occurred while updating profile: ' + error);
+                     toastr.error('An error occurred while updating profile: ' + error);
                   }
               });
           });

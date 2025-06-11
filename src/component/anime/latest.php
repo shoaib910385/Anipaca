@@ -18,7 +18,11 @@
                                     
                                     <?php
                                     // Fetch JSON data
-                                    $json = file_get_contents("$zpi/recently-updated");
+                                    $ch = curl_init();
+                                    curl_setopt($ch, CURLOPT_URL, "$zpi/recently-updated");
+                                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                    $json = curl_exec($ch);
+                                    curl_close($ch);
                                     $json = json_decode($json, true);
 
                                     // Check if 'results' and 'data' exist
@@ -50,26 +54,21 @@
                                                         data-src="<?= $anime['poster'] ?>"
                                                         src="<?= $websiteUrl ?>/public/images/no_poster.jpg"
                                                         alt="<?= $anime['title'] ?>">
-                                                    <a class="-poster-ahref"
+                                                    <a class="film-poster-ahref has-qtip"
                                                         href="/details/<?= $anime['id'] ?>"
                                                         title="<?= $anime['title'] ?>"
                                                         data-jname="<?= $anime['title'] ?>"><i class="fas fa-play"></i></a>
                                                 </div>
-                                                <div class="-detail">
-                                                    <h3 class="film-name">
-                                                      <a href="/details/<?= $anime['id'] ?>"
-                                                       title="<?= htmlspecialchars($anime['title']) ?>"
-                                                       class="dynamic-name anime-toggle"
-                                                       data-en="<?= htmlspecialchars($anime['title']) ?>"
-                                                       data-jp="<?= htmlspecialchars($anime['jname']) ?>">
-                                                      <?= htmlspecialchars($anime['title']) ?>
-                                                      </a>
-                                                    </h3>
+                                                <div class="film-detail">
+                                                     <h3 class="film-name">
+                                                        <a href="/details/<?= $anime['id'] ?>"
+                                                            class="dynamic-name"
+                                                            data-title="<?= htmlspecialchars($anime['title']) ?>" data-jname="<?= htmlspecialchars($anime['jname']) ?>"><?= htmlspecialchars($anime['title']) ?></a>
+                                                        </h3>
                                                     <div class="fd-infor">
-                                                       
-                                                        <span class="fdi-item"><?= $anime['tvInfo']['showType'] ?></span>
+                                                        <span class="fdi-item"><?= htmlspecialchars($anime['tvInfo']['showType']) ?></span>
                                                         <span class="dot"></span>
-                                                        <span class="fdi-item"><?= $anime['tvInfo']['duration'] ?></span>
+                                                        <span class="fdi-item"><?= htmlspecialchars($anime['tvInfo']['duration']) ?></span>
                                                     </div>
                                                 </div>
                                                 <div class="clearfix"></div>

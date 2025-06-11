@@ -191,12 +191,14 @@ if (empty($aniResults)) {
                                 </div>
                                 <div class="film-detail">
                                     <h3 class="film-name">
-                                        <a href="/details/<?=$anime['id']?>"><?=$anime['title']?></a>
+                                        <a href="/details/<?= $anime['id'] ?>"
+                                            class="dynamic-name"
+                                            data-title="<?= htmlspecialchars($anime['title']) ?>" data-jname="<?= htmlspecialchars($anime['jname']) ?>"><?= htmlspecialchars($anime['title']) ?></a>
                                     </h3>
                                     <div class="fd-infor">
-                                        <span class="fdi-item"><?=$anime['tvInfo']['showType']?></span>
+                                        <span class="fdi-item"><?= htmlspecialchars($anime['tvInfo']['showType']) ?></span>
                                         <span class="dot"></span>
-                                        <span class="fdi-item"><?=$anime['tvInfo']['duration']?></span>
+                                        <span class="fdi-item"><?= htmlspecialchars($anime['tvInfo']['duration']) ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -271,9 +273,9 @@ if (empty($aniResults)) {
         </div>
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/src/component/footer.php'; ?>
         <div id="mask-overlay"></div>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js">
-        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
         <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/app.js"></script>
         <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/comman.js"></script>
@@ -282,7 +284,7 @@ if (empty($aniResults)) {
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/function.js"></script>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+         0
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     </div>

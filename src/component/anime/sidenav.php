@@ -70,7 +70,8 @@ if ($data['success']) {
             </div>
         </div>
     </section>
-    <section class="block_area block_area_sidebar block_area-realtime">
+      <section class="block_area block_area_sidebar block_area-realtime">
+    
     <div class="block_area-header">
         <div class="float-left bah-heading mr-2">
             <h2 class="cat-heading">Top 10</h2>
@@ -94,14 +95,14 @@ if ($data['success']) {
                             <?php foreach ($data['results']['today'] as $anime): ?>
                             <li class="<?php echo $anime['number'] <= 3 ? 'item-top' : ''; ?>">
                                 <div class="film-number"><span><?php echo $anime['number']; ?></span></div>
-                                <div class="film-poster item-qtip" data-id="<?php echo $anime['data_id']; ?>">
-                                    <img data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['jname']; ?>">
+                                <div class="film-poster item-qtip" data-id="<?php echo $anime['id']; ?>">
+                                    <img src="<?= $websiteUrl ?>/public/images/no_poster.jpg" data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['jname']; ?>">
                                 </div>
                                 <div class="film-detail">
-                                    <h3 class="film-name">
+                                     <h3 class="film-name">
                                         <a href="/details/<?php echo $anime['id']; ?>" title="<?php echo $anime['jname']; ?>" 
-                                           class="dynamic-name" data-jname="<?php echo $anime['jname']; ?>">
-                                            <?php echo $anime['title']; ?>
+                                           class="dynamic-name" data-title="<?php echo htmlspecialchars($anime['title']); ?>" data-jname="<?php echo htmlspecialchars($anime['jname']); ?>">
+                                            <?php echo htmlspecialchars($anime['title']); ?>
                                         </a>
                                     </h3>
                                     <div class="fd-infor">
@@ -134,14 +135,14 @@ if ($data['success']) {
                             <?php foreach ($data['results']['week'] as $anime): ?>
                             <li class="<?php echo $anime['number'] <= 3 ? 'item-top' : ''; ?>">
                                 <div class="film-number"><span><?php echo $anime['number']; ?></span></div>
-                                <div class="film-poster item-qtip" data-id="<?php echo $anime['data_id']; ?>">
-                                    <img data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['jname']; ?>">
+                                <div class="film-poster item-qtip" data-id="<?php echo $anime['id']; ?>">
+                                    <img src="<?= $websiteUrl ?>/public/images/no_poster.jpg" data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['jname']; ?>">
                                 </div>
                                 <div class="film-detail">
-                                    <h3 class="film-name">
+                                     <h3 class="film-name">
                                         <a href="/details/<?php echo $anime['id']; ?>" title="<?php echo $anime['jname']; ?>" 
-                                           class="dynamic-name" data-jname="<?php echo $anime['jname']; ?>">
-                                            <?php echo $anime['title']; ?>
+                                           class="dynamic-name" data-title="<?php echo htmlspecialchars($anime['title']); ?>" data-jname="<?php echo htmlspecialchars($anime['jname']); ?>">
+                                            <?php echo htmlspecialchars($anime['title']); ?>
                                         </a>
                                     </h3>
                                     <div class="fd-infor">
@@ -174,14 +175,14 @@ if ($data['success']) {
                             <?php foreach ($data['results']['month'] as $anime): ?>
                             <li class="<?php echo $anime['number'] <= 3 ? 'item-top' : ''; ?>">
                                 <div class="film-number"><span><?php echo $anime['number']; ?></span></div>
-                                <div class="film-poster item-qtip" data-id="<?php echo $anime['data_id']; ?>">
-                                    <img data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['jname']; ?>">
+                                <div class="film-poster item-qtip" data-id="<?php echo $anime['id']; ?>">
+                                    <img src="<?= $websiteUrl ?>/public/images/no_poster.jpg" data-src="<?php echo $anime['poster']; ?>" class="film-poster-img lazyload" alt="<?php echo $anime['jname']; ?>">
                                 </div>
                                 <div class="film-detail">
-                                    <h3 class="film-name">
+                                     <h3 class="film-name">
                                         <a href="/details/<?php echo $anime['id']; ?>" title="<?php echo $anime['jname']; ?>" 
-                                           class="dynamic-name" data-jname="<?php echo $anime['jname']; ?>">
-                                            <?php echo $anime['title']; ?>
+                                           class="dynamic-name" data-title="<?php echo htmlspecialchars($anime['title']); ?>" data-jname="<?php echo htmlspecialchars($anime['jname']); ?>">
+                                            <?php echo htmlspecialchars($anime['title']); ?>
                                         </a>
                                     </h3>
                                     <div class="fd-infor">

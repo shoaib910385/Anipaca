@@ -258,21 +258,9 @@
                     <div class="name"><span>Popular</span></div>
                 </a>
 
-                
-                <div class="hst-item" style="cursor: pointer;" onclick="toggleLanguage()">
-  <div class="hst-icon"><i class="fas fa-language"></i></div>
-  <div class="name">
-    <span id="languageToggle">JP</span>
-  </div>
-</div>
-
-                
-
-                <div class="hst-item" style="cursor: pointer;" onclick="toggleLanguage()">
-                  <div class="hst-icon"><i class="fas fa-language"></i></div>
-                  <div class="name">
-                    <span id="languageToggle">JP</span>
-                  </div>
+                <div class="hst-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Select language of anime name to display.">
+                    <div class="select-anime-name toggle-lang"><span class="en">EN</span><span class="jp">JP</span></div>
+                    <div class="name"><span class="lang-display">English</span></div>
                 </div>
 
                 <a href="<?= $websiteUrl ?>/anime/movie" class="hst-item" data-toggle="tooltip"
@@ -293,36 +281,7 @@
                 <div class="clearfix"></div>
             </div>
         </div>
-        <div id="pick_menu">
-            <div class="pick_menu-ul">
-            <ul class="ulclear">
-                    <li class="pmu-item pmu-item-home">
-                        <a class="pmu-item-icon" href="/" title="Home">
-                            <img src="/public/images/pick-home.svg" data-toggle="tooltip" data-placement="right" title=""
-                                data-original-title="Home">
-                        </a>
-                    </li>
-                    <li class="pmu-item pmu-item-movies">
-                        <a class="pmu-item-icon" href="/movies" title="Movies">
-                            <img src="/public/images/pick-movies.svg" data-toggle="tooltip" data-placement="right"
-                                title="" data-original-title="Movies">
-                        </a>
-                    </li>
-                    <li class="pmu-item pmu-item-show">
-                        <a class="pmu-item-icon" href="/tv" title="TV Series">
-                            <img src="/public/images/pick-show.svg" data-toggle="tooltip" data-placement="right" title=""
-                                data-original-title="TV Series">
-                        </a>
-                    </li>
-                    <li class="pmu-item pmu-item-popular">
-                        <a class="pmu-item-icon" href="/anime/most-popular" title="Most Popular">
-                            <img src="/public/images/pick-popular.svg" data-toggle="tooltip" data-placement="right"
-                                title="" data-original-title="Most Popular">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+       
         <?php
         if (isset($_COOKIE['userID'])) {
             $user_id = $_COOKIE['userID'];
@@ -338,9 +297,9 @@
                                 <div class="btn-user-avatar" role="button">
                                     <div class="profile-avatar">
                                          <?php if (!empty($fetch['image'])): ?>
-                                            <img id="preview-avatar" src="<?= htmlspecialchars($fetch['image']) ?>" alt="Profile Picture">
+                                            <img id="avatar" src="<?= htmlspecialchars($fetch['image']) ?>" alt="Profile Picture">
                                          <?php else: ?>
-                                           <img id="preview-avatar" src="<?= htmlspecialchars($fetch['avatar_url']) ?>" alt="Default Avatar">
+                                           <img id="avatar" src="<?= htmlspecialchars($fetch['avatar_url']) ?>" alt="Default Avatar">
                                      <?php endif; ?>   
                                     </div>
                                 </div>
@@ -387,42 +346,3 @@
     </div>
 </div>
 
-
-<!-- ✅ Unified Footer Language Toggle Script -->
-<script>
-var lang = localStorage.getItem("lang") || "en";
-
-function updateLanguageDisplay() {
-    var lang = localStorage.getItem("lang") || "en";
-    var toggleBtn = document.getElementById("languageToggle");
-    if (toggleBtn) toggleBtn.innerText = (lang === "jp") ? "EN" : "JP";
-
-    document.querySelectorAll(".dynamic-name").forEach(function(el) {
-        // Try all possible data attribute combinations
-        var en = el.getAttribute("data-en") || el.getAttribute("data-title") || el.getAttribute("data-jname") || el.innerText;
-        var jp = el.getAttribute("data-jp") || el.getAttribute("data-jname") || el.getAttribute("data-title-jp") || en;
-        // Debug output to console to verify what is happening
-        // console.log('lang:', lang, 'en:', en, 'jp:', jp, 'el:', el);
-
-        if (lang === "jp" && jp && jp.trim() !== "") {
-            el.innerText = jp;
-        } else {
-            el.innerText = en;
-        }
-    });
-    // Details page (optional)
-    document.querySelectorAll(".anime-title").forEach(function(el) {
-        var en = el.getAttribute("data-title-en");
-        var jp = el.getAttribute("data-title-jp");
-        if (en && jp) el.innerText = (lang === "jp") ? jp : en;
-    });
-}
-function toggleLanguage() {
-    lang = (lang === "en") ? "jp" : "en";
-    localStorage.setItem("lang", lang);
-    updateLanguageDisplay();
-}
-
-// Always update on load!
-document.addEventListener("DOMContentLoaded", updateLanguageDisplay);
-</script>

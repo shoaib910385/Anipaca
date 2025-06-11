@@ -244,6 +244,7 @@ $totalVotes = $like_count + $dislike_count;
                                         </div>
 
                                         <iframe id="iframe-embed" src="" frameborder="0" referrerpolicy="strict-origin"
+                                            scrolling="no"
                                             allow="autoplay; fullscreen; geolocation; display-capture; picture-in-picture"
                                             webkitallowfullscreen mozallowfullscreen></iframe>
 
@@ -389,30 +390,43 @@ $totalVotes = $like_count + $dislike_count;
                                 </div>
                                 <div class="player-servers">
                                     <div id="servers-content">
-                                        <div class="ps_-status">
-                                            <div class="content">
-                                                <div class="server-notice"><strong>Please select the <b> Episode you
-                                                            want to watch</b></strong> Click on the servers manually in
-                                                    case of error.</div>
+                                        <div class="loading-relative" id="servers-loading" style="display: block;">
+                                            <div class="loading">
+                                                <div class="span1"></div>
+                                                <div class="span2"></div>
+                                                <div class="span3"></div>
                                             </div>
                                         </div>
-                                        <div class="ps_-block ps_-block-sub servers-mixed">
-                                            <div class="ps__-title"><i class="fa-regular fa-closed-captioning"></i> SUB:
+                                        <div class="servers-mixed" id="servers-mixed" style="display: none;">
+
+                                            <div class="ps_-status">
+                                                <div class="content">
+                                                    <div class="server-notice"><strong>Please select the <b> Episode you
+                                                                want to watch</b></strong> Click on the servers manually
+                                                        in
+                                                        case of error.</div>
+                                                </div>
                                             </div>
-                                            <div class="ps__-list">
-                                                <!-- SUB servers will be loaded here dynamically -->
-                                               
+                                            <div class="ps_-block ps_-block-sub servers-mixed">
+                                                <div class="ps__-title"><i class="fa-regular fa-closed-captioning"></i>
+                                                    SUB:
+                                                </div>
+                                                <div class="ps__-list">
+                                                    <!-- SUB servers will be loaded here dynamically -->
+
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="ps_-block ps_-block-dub servers-mixed">
-                                            <div class="ps__-title"><i class="fa-solid fa-microphone-lines"></i> DUB:
+                                            <div class="ps_-block ps_-block-dub servers-mixed">
+                                                <div class="ps__-title"><i class="fa-solid fa-microphone-lines"></i>
+                                                    DUB:
+                                                </div>
+                                                <div class="ps__-list">
+                                                    <!-- DUB servers will be loaded here dynamically -->
+
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div id="source-guide"></div>
                                             </div>
-                                            <div class="ps__-list">
-                                                <!-- DUB servers will be loaded here dynamically -->
-                                               
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div id="source-guide"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -548,9 +562,9 @@ $totalVotes = $like_count + $dislike_count;
                                                         </div>
                                                         <div class="ssli-detail">
                                                             <div class="ep-name dynamic-name"
-                                                                data-jname="<?= htmlspecialchars($episode['title'] ?? "Episode " . $episode['episode_no']) ?>"
-                                                                title="<?= htmlspecialchars($episode['title'] ?? "Episode " . $episode['episode_no']) ?>">
-                                                                <?= htmlspecialchars($episode['title'] ?? "Episode " . $episode['episode_no']) ?>
+                                                                data-jname="<?= htmlspecialchars($episode['jname'] ?? "Episode " . $episode['episode_no']) ?>"
+                                                                data-title="<?= htmlspecialchars($episode['title'] ?? "Episode " . $episode['episode_no']) ?>">
+                                                                <?= htmlspecialchars($episode['jname'] ?? "Episode " . $episode['episode_no']) ?>
                                                                 <?php if ($isFiller): ?>
                                                                 <span class="filler-badge">Filler</span>
                                                                 <?php endif; ?>
@@ -586,8 +600,8 @@ $totalVotes = $like_count + $dislike_count;
                                         <h2 class="film-name">
                                             <a href="/details/<?= htmlspecialchars($animeId) ?>"
                                                 class="text-white dynamic-name"
-                                                title="<?= htmlspecialchars($animeData['title']) ?>"
-                                                data-jname="<?= htmlspecialchars($animeData['title']) ?>">
+                                                data-title="<?= htmlspecialchars($animeData['title']) ?>"
+                                                data-jname="<?= htmlspecialchars($animeData['japanese']) ?>">
                                                 <?= htmlspecialchars($animeData['title']) ?>
                                             </a>
                                         </h2>
@@ -872,7 +886,7 @@ $totalVotes = $like_count + $dislike_count;
         </div>
         <?php include('src/component/footer.php'); ?>
         <div id="mask-overlay"></div>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/app.js?v=1.4"></script>
         <script type="text/javascript"
             src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
@@ -881,7 +895,7 @@ $totalVotes = $like_count + $dislike_count;
         <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/comment.js"></script>
         <link rel="stylesheet" href="<?= $websiteUrl ?>/src/assets/css/jquery-ui.css">
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        0
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?= $websiteUrl ?>/src/assets/js/function.js"></script>
@@ -1025,6 +1039,8 @@ $totalVotes = $like_count + $dislike_count;
                         $dubList.html('<div class="item">No DUB servers available</div>');
                     }
                     attachServerListeners();
+                    $('#servers-loading').hide();
+                        $('#servers-mixed').show();
 
                     // Try to select preferred server
                     let foundPreferred = $(`.btn-server[data-server-type="${currentServerType}"][data-server-name="${currentServerName}"]`);
@@ -1049,6 +1065,7 @@ $totalVotes = $like_count + $dislike_count;
                         }
 
                         attachServerListeners();
+                        
                     }
                 }
 

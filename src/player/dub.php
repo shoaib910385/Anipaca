@@ -40,6 +40,24 @@ foreach ($categories as $category) {
 }
 curl_close($ch);
 
+if (!isset($data['results']['streamingLink']['link']['file'])) {
+    echo '<div style="position: relative; width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url(https://anipaca.fun/public/images/404.gif) no-repeat center center; background-size: cover; filter: blur(5px); z-index: 0;"></div>
+        <div id="warningMessage" style="position: absolute; background: rgba(0, 0, 0, 0.75); color: white; font-size: clamp(14px, 2vw, 18px); font-weight: bold; z-index: 2; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); text-align: center; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-family: \'Poppins\', sans-serif; opacity: 0; transform: translateY(-10px); transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; max-width: 80%; flex-wrap: wrap;">
+            <span style="background: red; color: white; padding: 5px 8px; border-radius: 50%; font-weight: bold; flex-shrink: 0;">?</span>
+            <span style="flex: 1;">Anime not available. Please choose a different server.</span>
+        </div>
+        <script>
+            window.onload = function() {
+                let warningMessage = document.getElementById("warningMessage");
+                warningMessage.style.opacity = "1";
+                warningMessage.style.transform = "translateY(0)";
+            };
+        </script>
+    </div>';
+    exit;
+}
+
 
 $streamingData = $data['results']['streamingLink'];
 $m3u8_url = $streamingData['link']['file'];
@@ -254,8 +272,8 @@ if ($isPlay) {
             ],
             layers: [
                 {
-            name: 'poster',
-            html: `<img style="width: 35px" src="https://hianimez.to/images/share-icon.gif">`,
+            name: 'logo',
+            html: `<img style="width: 35px" src="https://anipaca.fun/public/logo/plogo.png">`,
             tooltip: 'Poster Tip',
             style: {
                 position: 'absolute',

@@ -9,7 +9,7 @@ function smap(url) {
 function toggleAnimeName() {
     $('.dynamic-name').each(function() {
         var currentName = $(this).text()
-          ,jname = $(this).data('jname')
+          , jName = $(this).data('jname')
           , _this = $(this);
         _this.animate({
             'opacity': 0
@@ -19,6 +19,16 @@ function toggleAnimeName() {
                     'opacity': 1
                 }, 200);
                 _this.data('jname', currentName);
+
+                // Save the state to local storage
+                var state = localStorage.getItem('toggleAnimeNameState');
+                if (state === null) {
+                    state = {};
+                } else {
+                    state = JSON.parse(state);
+                }
+                state[_this.data('id')] = !_this.data('isJPName');
+                localStorage.setItem('toggleAnimeNameState', JSON.stringify(state));
             }
         });
     })
@@ -26,7 +36,7 @@ function toggleAnimeName() {
 function watchListSubmit(data) {
     if (!loading) {
         loading = true;
-        $.post('/src/pages/ajax/watch-list/add', data, function(res) {
+        $.post('/src/ajax/anime/wl-up', data, function(res) {
             if (res.redirectTo) {
                 window.location.href = res.redirectTo;
             }
@@ -155,6 +165,7 @@ $(document).ready(function() {
         },
         autoplay: 2000,
     });
+
     $(".btn-more-desc").click(function(e) {
         $(".film-description .text").toggleClass("text-full");
         $(this).toggleClass("active");
@@ -169,130 +180,29 @@ $(document).ready(function() {
     $("#text-home-expand").click(function(e) {
         $(".text-home").toggleClass("thm-expand");
     });
-    $('[data-toggle="tooltip"]').tooltip();
+
     $(".toggle-basic").click(function(e) {
         $(this).toggleClass("off");
     });
-    var hidden_results = true;
-    $('#search-suggest').mouseover(function() {
-        hidden_results = false;
-    });
-    $('#search-suggest').mouseout(function() {
-        hidden_results = true;
-    });
-    var timeout = null;
-    $('.search-input').keyup(function() {
-        if (timeout != null) {
-            clearTimeout(timeout);
-        }
-        timeout = setTimeout(function() {
-            timeout = null;
-            var keyword = $('.search-input').val().trim();
-            if (keyword.length > 1) {
-                $('#search-suggest').show();
-                $('#search-loading').show();
-                $.get("/src/pages/ajax/search/suggest?keyword=" + keyword, function(res) {
-                    $('#search-suggest .result').html(res.html);
-                    $('#search-suggest .result').slideUp('fast');
-                    $('#search-suggest .result').slideDown('fast');
-                    $('#search-loading').hide();
-                });
-            } else {
-                $('#search-suggest').hide();
-            }
-        }, 500);
-    });
-    $('.search-input').blur(function() {
-        if (hidden_results) {
-            $('#search-suggest').slideUp('fast');
-        }
-    });
-    $(document).on("click", ".wl-item", function() {
-        if (checkLogin()) {
-            var type = $(this).data('type');
-            if (typeof grecaptcha !== 'undefined') {
-                grecaptcha.execute(recaptchaSiteKey, {
-                    action: 'wish_list'
-                }).then(function(_token) {
-                    watchListSubmit({
-                        movieId,
-                        type,
-                        page,
-                        _token
-                    });
-                })
-            } else {
-                watchListSubmit({
-                    movieId,
-                    type,
-                    page,
-                    _token: ''
-                });
-            }
-        }
-    });
-    $(document).on("click", ".wl-item-wl", function() {
-        if (checkLogin()) {
-            var type = $(this).data('type')
-              , movieId = $(this).data('movieid');
-            if (typeof grecaptcha !== 'undefined') {
-                grecaptcha.execute(recaptchaSiteKey, {
-                    action: 'wish_list'
-                }).then(function(_token) {
-                    watchListSubmit({
-                        movieId,
-                        type,
-                        page,
-                        _token
-                    });
-                })
-            } else {
-                watchListSubmit({
-                    movieId,
-                    type,
-                    page,
-                    _token: ''
-                });
-            }
-        }
-    });
-    $(document).on("click", ".list-wl-item", function() {
-        if (checkLogin()) {
-            var id = $(this).data('id')
-            if (typeof grecaptcha !== 'undefined') {
-                grecaptcha.execute(recaptchaSiteKey, {
-                    action: 'wish_list'
-                }).then(function(_token) {
-                    watchListSubmit({
-                        movieId: id,
-                        _token
-                    });
-                })
-            } else {
-                watchListSubmit({
-                    movieId: id,
-                    _token: ''
-                });
-            }
-        }
-    });
-    $('#profile-form').submit(function(e) {
-        e.preventDefault();
-        $('#profile-loading').show();
-        var formData = $(this).serialize();
-        $.post('/src/ajax/update_profile.php', formData, function(res) {
-            $('#profile-loading').hide();
-            if (res.status) {
-                toastr.success(res.msg, '', {
-                    timeout: 5000
-                });
-            } else {
-                toastr.error(res.msg, '', {
-                    timeout: 5000
-                });
-            }
-        });
-    });
+    $(".select-anime-name").click(function() {
+        $(".select-anime-name").toggleClass("off"),
+        quickSettings("anime_name", $(this).hasClass("off") ? "jp" : "en"),
+        toggleAnimeName("all")
+    }),
+    $(".select-play-dub").click(function() {
+        $(".select-play-dub").toggleClass("active"),
+        quickSettings("enable_dub", $(this).hasClass("active") ? 1 : 0)
+    }),
+
+    $("#turn-off-light").click(function(e) {
+        $("#mask-overlay, .anis-watch-wrap").toggleClass("active")
+    }),
+    $("#mask-overlay").click(function(e) {
+        $("#mask-overlay, .anis-watch-wrap").removeClass("active"),
+        $("#turn-off-light").removeClass("off")
+    }),
+   
+
     $('#contact-form').submit(function(e) {
         e.preventDefault();
         if (!loading) {
@@ -307,10 +217,14 @@ $(document).ready(function() {
             });
         }
     });
+
+   
 });
+
 $(document).on('click', '.dropdown-menu-noti,.dropdown-menu-right', function(e) {
     e.stopPropagation();
 });
+
 $(document).on('keyup', '#search-ep', function(e) {
     e.preventDefault();
     var value = e.target.value;
@@ -332,6 +246,7 @@ $(document).on('keyup', '#search-ep', function(e) {
         $('.ep-page-item[data-page=' + currPage + ']').click();
     }
 });
+
 $('.f-genre-item').click(function() {
     $(this).toggleClass('active');
     var genreIds = [];
@@ -340,8 +255,10 @@ $('.f-genre-item').click(function() {
     })
     $('#f-genre-ids').val(genreIds.join(','));
 });
+
 if (Cookies.get('DevTools'))
     Cookies.remove('DevTools');
+
 if ($('.film-description .text').length > 0) {
     var fullDes = $('.film-description .text').html();
     if (fullDes.length > 300) {
@@ -357,3 +274,85 @@ if ($('.film-description .text').length > 0) {
         }
     });
 }
+
+// Add this CSS dynamically for the custom tooltip
+
+
+
+  
+
+// Ensure to create the tooltip divs in your HTML for each poster
+// Example: <div id="tooltip-1" class="custom-tooltip">Tooltip content here</div>
+// Make sure to replace '1' with the appropriate id for each poster
+
+
+// Handle language toggle
+$(function () {
+    const langToggles = $('.toggle-lang span');
+
+    function updateLangDisplay(lang) {
+        $('.lang-display').text(lang === 'jp' ? 'Japanese' : 'English');
+    }
+
+    function applyLanguage() {
+        // Set default language to 'en' if not set
+        let selectedLang = localStorage.getItem('animeLang');
+        if (!selectedLang) {
+            selectedLang = 'en';
+            localStorage.setItem('animeLang', 'en');
+        }
+
+        // Update the language display text
+        updateLangDisplay(selectedLang);
+
+        // Toggle 'off' class on the parent element
+        $('.select-anime-name.toggle-lang').toggleClass('off', selectedLang === 'jp');
+
+        // Update all dynamic names
+        $('.dynamic-name').each(function() {
+            const $this = $(this);
+            const title = $this.data('title');
+            const jname = $this.data('jname');
+            $this.stop().fadeTo(250, 0, function() {
+                $this.text(selectedLang === 'jp' ? (jname || title) : title);
+            }).fadeTo(250, 1);
+        });
+
+        // Update active state of language toggles
+        langToggles.removeClass('active');
+        langToggles.filter('.' + selectedLang).addClass('active');
+    }
+
+    // Handle language toggle clicks
+    $('.toggle-lang').on('click', 'span', function(e) {
+        e.stopPropagation();
+        const selectedLang = $(this).hasClass('jp') ? 'jp' : 'en';
+        localStorage.setItem('animeLang', selectedLang);
+        applyLanguage();
+    });
+
+    // Initialize
+    applyLanguage();
+});
+
+// $(".select-anime-name").click(function () {
+//     $(this).toggleClass("off");
+//     quickSettings("anime_name", $(this).hasClass("off") ? "jp" : "en");
+//     toggleAnimeName("all");
+// });
+
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+$('div.ui-helper-hidden-accessible[role="log"]').remove();
+$('div.ui-helper-hidden-accessible[role="tooltip"]').remove();
+
+document.addEventListener('DOMContentLoaded', function () {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+      new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  });
+  
