@@ -9,7 +9,6 @@ if (isset($commentData)) {
     error_log('Comment Data Received: ' . print_r($commentData, true));
 }
 
-error_log("POST data received: " . print_r($_POST, true));
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     header('Content-Type: application/json');
@@ -51,8 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 echo json_encode(['success' => false, 'message' => 'Missing anime ID']);
                 exit;
             }
-
-            error_log('Adding comment with data: ' . print_r($_POST, true));
             
             $stmt = $conn->prepare("SELECT username, image FROM users WHERE id = ?");
             if (!$stmt) {
@@ -74,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             
             $result = $commentSystem->addComment($_POST['content'], $user['username'], $avatar_url);
             
-            error_log('Comment result: ' . print_r($result, true));
             
             echo json_encode($result);
             break;
