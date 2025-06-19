@@ -1,5 +1,5 @@
 // Define a cache name
-const CACHE_NAME = 'anime-site-cache-v1';
+const CACHE_NAME = 'anipaca-cache-v1';
 
 // ShareThis domains to bypass
 const BYPASS_DOMAINS = [
@@ -11,8 +11,6 @@ const BYPASS_DOMAINS = [
 // List of URLs to cache (you can add more as needed)
 const urlsToCache = [
     '/index.php',
-    '/home.php',
-    '/search.php',
     '/src/assets/css/styles.min.css',
     '/src/assets/css/bootstrap.min.css',
     '/src/assets/css/search.css',
