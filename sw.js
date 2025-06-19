@@ -8,7 +8,7 @@ const BYPASS_DOMAINS = [
     'buttons-config.sharethis.com'
 ];
 
-// List of URLs to cache - updated with existing project files
+// List of URLs to cache (you can add more as needed)
 const urlsToCache = [
     '/index.php',
     '/home.php',
@@ -21,101 +21,92 @@ const urlsToCache = [
     '/src/assets/js/function.js',
     '/public/logo/favicon.png',
     '/public/logo/logo.png',
-    '/public/logo/favicon.ico'  // Added favicon
+    '/public/logo/favicon.ico',
+    '/offline.html' // ✅ Make sure you create this file!
 ];
 
-// Install event - caching the assets with error handling
+// Install event – cache all important files
 self.addEventListener('install', event => {
-    console.log('Service worker installed'); // Add this line
+    console.log('✅ Service Worker: Installed');
+    self.skipWaiting(); // Activate immediately
+
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('Cache opened successfully');
-                // Cache files individually to handle failures gracefully
+                console.log('✅ Caching assets...');
                 return Promise.all(
-                    urlsToCache.map(url => {
-                        return cache.add(url).catch(error => {
-                            console.error('Failed to cache:', url, error);
-                            // Continue caching other files even if one fails
-                            return Promise.resolve();
-                        });
-                    })
+                    urlsToCache.map(url =>
+                        cache.add(url).catch(err => {
+                            console.error('❌ Failed to cache:', url, err);
+                            return Promise.resolve(); // Keep going on failure
+                        })
+                    )
                 );
-            })
-            .catch(error => {
-                console.error('Service Worker installation failed:', error);
             })
     );
 });
 
-// Fetch event - serving cached content when offline with improved error handling
-self.addEventListener('fetch', event => {
+// Activate event – remove old caches
+self.addEventListener('activate', event => {
+    console.log('✅ Service Worker: Activated');
+    const cacheWhitelist = [CACHE_NAME];
+    event.waitUntil(
+        caches.keys().then(cacheNames =>
+            Promise.all(
+                cacheNames.map(name => {
+                    if (!cacheWhitelist.includes(name)) {
+                        console.log('🗑 Deleting old cache:', name);
+                        return caches.delete(name);
+                    }
+                })
+            )
+        )
+    );
+});
 
-    // Check if the request is for ShareThis domains
+// Fetch event – serve cached or network fallback
+self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
+
+    // Bypass ShareThis scripts
     if (BYPASS_DOMAINS.some(domain => url.hostname.includes(domain))) {
-        // Don't interfere with ShareThis requests
         return;
     }
 
     event.respondWith(
-        caches.match(event.request)
+        caches.match(event.request, { ignoreSearch: true }) // match even with ?v= params
             .then(response => {
                 if (response) {
-                    console.log('Cache hit for:', event.request.url); // Add this line
+                    console.log('✅ Cache hit:', event.request.url);
                     return response;
                 }
 
-                // Clone the request because it can only be used once
+                // Clone the request to use it twice
                 const fetchRequest = event.request.clone();
 
-                return fetch(fetchRequest).then(response => {
-                    // Check if we received a valid response
-                    if (!response || response.status !== 200 || response.type !== 'basic') {
-                        return response;
+                return fetch(fetchRequest).then(networkResponse => {
+                    if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+                        return networkResponse;
                     }
 
-                    // Clone the response because it can only be used once
-                    const responseToCache = response.clone();
+                    const responseToCache = networkResponse.clone();
 
-caches.open(CACHE_NAME)
-    .then(cache => {
-        // Only cache successful GET responses
-        if (event.request.method === 'GET' && response.status === 200) {
-            cache.put(event.request, responseToCache);
-        }
-    });
+                    event.waitUntil(
+                        caches.open(CACHE_NAME).then(cache => {
+                            if (event.request.method === 'GET') {
+                                cache.put(event.request, responseToCache);
+                            }
+                        })
+                    );
 
-                    return response;
+                    return networkResponse;
                 }).catch(() => {
-                    // Return a custom offline page or fallback content
+                    // Fallback: show offline page if available
                     if (event.request.headers.get('accept').includes('text/html')) {
                         return caches.match('/offline.html');
                     }
-                    // For other resources, return a simple error response
-                    return new Response('Offline content not available');
+                    return new Response('⚠️ You are offline and this resource is unavailable.');
                 });
-
-                console.log('Cache miss for:', event.request.url); // Add this line
-                return fetch(event.request);
             })
-    );
-});
-
-// Activate event - cleaning up old caches
-self.addEventListener('activate', event => {
-    console.log('Service worker activated'); // Add this line
-    const cacheWhitelist = [CACHE_NAME];
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cacheName => {
-                    if (cacheWhitelist.indexOf(cacheName) === -1) {
-
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        })
     );
 });
