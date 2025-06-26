@@ -225,7 +225,7 @@ $totalVotes = $like_count + $dislike_count;
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="/home" title="Home">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="/tv">TV</a></li>
+                                        <li class="breadcrumb-item"><a href="/anime/tv">TV</a></li>
                                         <li class="breadcrumb-item dynamic-name active"
                                             data-jname="<?= htmlspecialchars($animeData['title']) ?>">
                                             <?= htmlspecialchars($animeData['title']) ?>
