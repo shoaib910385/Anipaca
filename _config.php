@@ -26,7 +26,7 @@ $telegram = "https://t.me/thedrxnet";
 $instagram = "https://www.instagram.com"; 
 
 // all the api you need
-$zpi = "https://your-hosted-api.com/api"; //https://github.com/PacaHat/zen-api
+$zpi = "https://idknsjsn.vercel.app/api"; //https://github.com/PacaHat/zen-api
 $proxy = $websiteUrl . "/src/ajax/proxy.php?url=";
 
 //If you want faster loading speed just put // before the first proxy and remove slashes from this one 
