@@ -1,26 +1,29 @@
 
 <?php 
+// === Database Connection ===
+$servername = "localhost"; // from "Server: localhost:3306"
+$username   = "animetoons_user";
+$password   = "Stalker@123";
+$database   = "animetoons_animetoons_db";
 
-$conn = new mysqli("HOSTNAME", "USERNAME", "PASSWORD", "DATABASE"); //just like $conn = new mysqli("localhost", "root", "", "anipaca");
+$conn = mysqli_connect($servername, $username, $password, $database);
 
-
-if ($conn->connect_error) {
-    error_log("Database connection failed: " . $conn->connect_error);
-    echo("Database connection failed.");
+if (!$conn) {
+    die("❌ Connection failed: " . mysqli_connect_error());
 }
 
-$websiteTitle = "AniPaca";
+$websiteTitle = "AnimeToons";
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
 $websiteUrl = "{$protocol}://{$_SERVER['SERVER_NAME']}";
-$websiteLogo = $websiteUrl . "/public/logo/logo.png";
-$contactEmail = "raisulentertainment@gmail.com";
+$websiteLogo = "https://files.catbox.moe/bci5lu.png";
+$contactEmail = "support@animetoons.site";
 
 $version = "1.0.2";
 
-$discord = "https://dcd.gg/anipaca";
-$github = "https://github.com/PacaHat";
-$telegram = "https://t.me/anipaca";
-$instagram = "https://www.instagram.com/pxr15_"; 
+$discord = "https://dcd.gg";
+$github = "https://github.com";
+$telegram = "https://t.me/thedrxnet";
+$instagram = "https://www.instagram.com"; 
 
 // all the api you need
 $zpi = "https://your-hosted-api.com/api"; //https://github.com/PacaHat/zen-api
